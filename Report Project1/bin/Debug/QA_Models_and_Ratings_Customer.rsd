@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@Language">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Evaluation_Created_On_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Evaluation_Created_On_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Provider_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Customer_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT DISTINCT 
+             customer.name AS customer_name, customer.oid AS customer_oid, entry.oid AS entry_oid, entry.vle AS entry_vle, evaluation_v.document_name AS evaluation_v_document_name, evaluation_v.evaluated_document_id AS evaluation_v_evaluated_document_id, 
+             evaluation_v.oid AS evaluation_v_oid, evaluation_v.request_id AS evaluation_v_request_id, evaluation_v.request_no AS evaluation_v_request_no, evaluation_v.score AS evaluation_v_score, language_v.oid AS language_v_oid, language_v.short_name AS language_v_short_name, 
+             language_v_target.oid AS language_v_target_oid, language_v_target.short_name AS language_v_target_short_name, quality_assessment_category_v.oid AS quality_assessment_category_v_oid, 
+             quality_assessment_category_v.quality_assessment_category_name AS quality_assessment_category_v_quality_assessment_category_name, quality_assessment_model_v.name_elmnt AS quality_assessment_model_v_name_elmnt, 
+             quality_assessment_model_v.oid AS quality_assessment_model_v_oid, severity_v.oid AS severity_v_oid, severity_v.severity_name AS severity_v_severity_name
+FROM   evaluation_v LEFT OUTER JOIN
+             entry ON evaluation_v.oid = entry.evaluation_id LEFT OUTER JOIN
+             severity_v ON entry.severity_id = severity_v.oid LEFT OUTER JOIN
+             quality_assessment_category_v ON severity_v.quality_assessment_category_id = quality_assessment_category_v.oid LEFT OUTER JOIN
+             request ON evaluation_v.request_id = request.oid LEFT OUTER JOIN
+             customer ON request.customer_id = customer.oid LEFT OUTER JOIN
+             provider ON evaluation_v.evaluated_provider_id = provider.oid LEFT OUTER JOIN
+             evaluation_language_pairs ON evaluation_v.oid = evaluation_language_pairs.evaluation_id LEFT OUTER JOIN
+             language_pair ON evaluation_language_pairs.language_pairs_id = language_pair.oid LEFT OUTER JOIN
+             language_v AS language_v_target ON language_pair.dst_lngge_id = language_v_target.oid LEFT OUTER JOIN
+             language_v ON language_pair.src_lngge_id = language_v.oid LEFT OUTER JOIN
+             quality_assessment_model_v ON evaluation_v.qa_model_quality_assessment_model_id = quality_assessment_model_v.oid
+WHERE (evaluation_v.oid IS NULL OR
+             evaluation_v.mapkey = @Language) AND (severity_v.oid IS NULL OR
+             severity_v.mapkey = @Language) AND (quality_assessment_category_v.oid IS NULL OR
+             quality_assessment_category_v.mapkey = @Language) AND (quality_assessment_model_v.oid IS NULL OR
+             quality_assessment_model_v.mapkey = @Language) AND (language_v.oid IS NULL OR
+             language_v.mapkey = @Language) AND (language_v_target.oid IS NULL OR
+             language_v_target.mapkey = @Language) AND (@P_Evaluation_Created_On_From IS NULL OR
+             evaluation_v.created_on &gt;= @P_Evaluation_Created_On_From) AND (@P_Evaluation_Created_On_To IS NULL OR
+             evaluation_v.created_on &lt;= @P_Evaluation_Created_On_To) AND (@P_Hidden_Provider_Numeric IS NULL OR
+             @P_Hidden_Provider_Numeric = 0 OR
+             provider.oid = @P_Hidden_Provider_Numeric) AND (@P_Hidden_Customer_Numeric IS NULL OR
+             @P_Hidden_Customer_Numeric = 0 OR
+             customer.oid = @P_Hidden_Customer_Numeric) AND (evaluation_v.evaluated_document_id IS NOT NULL)</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="customer_name">
+        <DataField>customer_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="customer_oid">
+        <DataField>customer_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="entry_oid">
+        <DataField>entry_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="entry_vle">
+        <DataField>entry_vle</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="evaluation_v_document_name">
+        <DataField>evaluation_v_document_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="evaluation_v_evaluated_document_id">
+        <DataField>evaluation_v_evaluated_document_id</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="evaluation_v_oid">
+        <DataField>evaluation_v_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="evaluation_v_request_id">
+        <DataField>evaluation_v_request_id</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="evaluation_v_request_no">
+        <DataField>evaluation_v_request_no</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="evaluation_v_score">
+        <DataField>evaluation_v_score</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="language_v_oid">
+        <DataField>language_v_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="language_v_short_name">
+        <DataField>language_v_short_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="language_v_target_oid">
+        <DataField>language_v_target_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="language_v_target_short_name">
+        <DataField>language_v_target_short_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="quality_assessment_category_v_oid">
+        <DataField>quality_assessment_category_v_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="quality_assessment_category_v_quality_assessment_category_name">
+        <DataField>quality_assessment_category_v_quality_assessment_category_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="quality_assessment_model_v_name_elmnt">
+        <DataField>quality_assessment_model_v_name_elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="quality_assessment_model_v_oid">
+        <DataField>quality_assessment_model_v_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="severity_v_oid">
+        <DataField>severity_v_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="severity_v_severity_name">
+        <DataField>severity_v_severity_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

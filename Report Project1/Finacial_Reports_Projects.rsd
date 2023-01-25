@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Description />
+  <DataSet Name="Finacial_Reports_Request_Detailed_Cost">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@Language">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Currency_Code">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Provider_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Customer_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Compl_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Compl_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_FILTER_REQUEST_STATUS">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:UserDefined>true</rd:UserDefined>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT DISTINCT 
+             request_financial_stats.cost, currency.symbol, contact_requested_by.last_name, contact_requested_by.first_name, customer.name, request.request_no, request.production_statusflow, request.is_quotation, request.completed_date, request.reception_date, 
+             request.purchase_order, request_real_cost_v.real_cost,request_financial_stats.price,request_real_price_v.real_price
+FROM   request LEFT OUTER JOIN
+             work_flow ON request.oid = work_flow.request_id LEFT OUTER JOIN
+             request_real_cost_v ON request.oid = request_real_cost_v.request_id LEFT OUTER JOIN
+             request_real_price_v ON request.oid = request_real_price_v.oid LEFT OUTER JOIN
+             request_financial_stats ON request.oid = request_financial_stats.request_id LEFT OUTER JOIN
+             currency ON request_financial_stats.currency_id = currency.oid LEFT OUTER JOIN
+             contact AS contact_requested_by ON request.requested_by_contact_id = contact_requested_by.oid LEFT OUTER JOIN
+             customer ON request.customer_id = customer.oid LEFT OUTER JOIN
+             step ON work_flow.oid = step.workflow_work_flow_id LEFT OUTER JOIN
+             task ON step.oid = task.step_id
+WHERE (request.model = 0) AND (step.deleted = 0) AND (request.production_statusflow = @P_FILTER_REQUEST_STATUS) AND (@P_Req_Rcpt_Date_From IS NULL OR
+             request.reception_date &gt;= @P_Req_Rcpt_Date_From) AND (@P_Req_Rcpt_Date_To IS NULL OR
+             request.reception_date &lt;= @P_Req_Rcpt_Date_To) AND (request_financial_stats.currency_id IS NULL OR
+             request_financial_stats.currency_id = @P_Currency_Code) AND (request_real_cost_v.currency_id IS NULL OR
+             request_real_cost_v.currency_id = @P_Currency_Code) AND (request_real_price_v.currency_id IS NULL OR
+             request_real_price_v.currency_id = @P_Currency_Code) AND (@P_Hidden_Provider_Numeric IS NULL OR
+             @P_Hidden_Provider_Numeric = 0 OR
+             task.provider_id = @P_Hidden_Provider_Numeric) AND (@P_Hidden_Customer_Numeric IS NULL OR
+             @P_Hidden_Customer_Numeric = 0 OR
+             customer.oid = @P_Hidden_Customer_Numeric) AND (request.is_quotation = 0) AND (@P_Req_Compl_Date_From IS NULL OR
+             request.completed_date &gt;= @P_Req_Compl_Date_From) AND (@P_Req_Compl_Date_To IS NULL OR
+             request.completed_date &lt;= @P_Req_Compl_Date_To)</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="cost">
+        <DataField>cost</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="symbol">
+        <DataField>symbol</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="last_name">
+        <DataField>last_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="first_name">
+        <DataField>first_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="name">
+        <DataField>name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_no">
+        <DataField>request_no</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="production_statusflow">
+        <DataField>production_statusflow</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="is_quotation">
+        <DataField>is_quotation</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="completed_date">
+        <DataField>completed_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="reception_date">
+        <DataField>reception_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="purchase_order">
+        <DataField>purchase_order</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="real_cost">
+        <DataField>real_cost</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="price">
+        <DataField>price</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="real_price">
+        <DataField>real_price</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

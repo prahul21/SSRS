@@ -1,0 +1,641 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@P_Provider_Customer">
+          <DefaultValue>=new Object() {"Customer", "Provider"}</DefaultValue>
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+          <rd:IsMultiValued>true</rd:IsMultiValued>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Invoice_Sent">
+          <DefaultValue>=new Object() {"All", "Sent", "Not Sent"}</DefaultValue>
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+          <rd:IsMultiValued>true</rd:IsMultiValued>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Invoice_Paid">
+          <DefaultValue>=new Object() {"All", "Paid", "Not Paid"}</DefaultValue>
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+          <rd:IsMultiValued>true</rd:IsMultiValued>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Provider_Numeric">
+          <DefaultValue>0</DefaultValue>
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Customer_Numeric">
+          <DefaultValue>0</DefaultValue>
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT DISTINCT
+          customer.reference                             As customer_reference
+        , customer.name                                  As customer_name
+        , project.active                                 As project_active
+        , project.reception_date                         As project_reception_date
+        , project.delivery_date                          As project_delivery_date
+        , project.code                                   As project_code
+        , project.name                                   As project_name
+        , project.description                            As project_description
+        , dmn_v.elmnt                                    As dmn_v_elmnt
+        , contact.notification_email                     As contact_notification_email
+        , contact.last_name                              As contact_last_name
+        , contact.first_name                             As contact_first_name
+        , invoice.received                               As invoice_received
+        , invoice.facture_no                             As invoice_facture_no
+        , invoice.lang                                   As invoice_lang
+        , invoice.oid                                    As invoice_oid
+        , invoice.sent_date                              As invoice_sent_date
+        , invoice.note                                   As invoice_note
+        , invoice.payable                                As invoice_payable
+        , invoice.sent                                   As invoice_sent
+        , invoice.sub_total_before_discount              As invoice_sub_total_before_discount
+        , invoice.sub_total_before_tax                   As invoice_sub_total_before_tax
+        , invoice.total                                  As invoice_total
+        , invoice.invoice_date                           As invoice_invoice_date
+        , address_v.country_code                         As address_v_country_code
+        , address_v.timezone                             As address_v_timezone
+        , address_v.country_name                         As address_v_country_name
+        , address_v.po_box                               As address_v_po_box
+        , address_v.country_local_name                   As address_v_country_local_name
+        , address_v.fax                                  As address_v_fax
+        , address_v.postal_code                          As address_v_postal_code
+        , address_v.telephone                            As address_v_telephone
+        , address_v.line2                                As address_v_line2
+        , address_v.line1                                As address_v_line1
+        , address_v.name                                 As address_v_name
+        , address_v.city                                 As address_v_city
+        , unit_v.elmnt                                   As unit_v_elmnt
+        , business_unit.code                             As business_unit_code
+        , business_unit.name                             As business_unit_name
+        , custom_field_value_v_project.name              As custom_field_value_v_project_name
+        , custom_field_value_v_project.unique_identifier As custom_field_value_v_project_unique_identifier
+        , custom_field_value_v_project.description       As custom_field_value_v_project_description
+        , custom_field_value_v_project.value             As custom_field_value_v_project_value
+        , payable_invoice.paid                           As payable_invoice_paid
+        , payable_invoice.sent                           As payable_invoice_sent
+        , payable_invoice.sent_date                      As payable_invoice_sent_date
+        , service_v.elmnt                                As service_v_elmnt
+        , invoice_reference_numbers_v.reference_numbers  As invoice_reference_numbers_v_reference_numbers
+        , category_v.elmnt                               As category_v_elmnt
+        , invoice_purchase_orders_v.purchase_orders      As invoice_purchase_orders_v_purchase_orders
+        , provider.last_name                             As provider_last_name
+        , provider.first_name                            As provider_first_name
+        , provider.time_zone                             As provider_time_zone
+        , provider.company_name                          As provider_company_name
+        , provider.active                                As provider_active
+        , provider.provider_affiliation                  As provider_provider_affiliation
+        , currency_v.elmnt                               As currency_v_elmnt
+        , currency_v.code                                As currency_v_code
+        , currency_v.exchange_rate                       As currency_v_exchange_rate
+        , currency_v.symbol                              As currency_v_symbol
+FROM
+          ((((((((((((((((((((((invoice
+          LEFT JOIN
+                    currency_v
+                    ON
+                              (
+                                        invoice.currency_id = currency_v.oid
+                              )
+          )
+          LEFT JOIN
+                    payable_invoice
+                    ON
+                              (
+                                        invoice.oid = payable_invoice.invoice_id
+                              )
+          )
+          LEFT JOIN
+                    provider
+                    ON
+                              (
+                                        payable_invoice.provider_id = provider.oid
+                              )
+          )
+          LEFT JOIN
+                    invoice_purchase_orders_v
+                    ON
+                              (
+                                        invoice.oid = invoice_purchase_orders_v.invoice_id
+                              )
+          )
+          LEFT JOIN
+                    invoice_reference_numbers_v
+                    ON
+                              (
+                                        invoice.oid = invoice_reference_numbers_v.invoice_id
+                              )
+          )
+          LEFT JOIN
+                    contact
+                    ON
+                              (
+                                        invoice.bill_to_contact_id = contact.oid
+                              )
+          )
+          LEFT JOIN
+                    address_v
+                    ON
+                              (
+                                        contact.address_id = address_v.oid
+                              )
+          )
+          LEFT JOIN
+                    invoice_line
+                    ON
+                              (
+                                        invoice.oid = invoice_line.invoice_id
+                              )
+          )
+          LEFT JOIN
+                    invoice_line_detail
+                    ON
+                              (
+                                        invoice_line.oid = invoice_line_detail.invoice_line_id
+                              )
+          )
+          LEFT JOIN
+                    service_v
+                    ON
+                              (
+                                        invoice_line_detail.service_id = service_v.oid
+                              )
+          )
+          LEFT JOIN
+                    unit_v
+                    ON
+                              (
+                                        invoice_line_detail.unit_id = unit_v.oid
+                              )
+          )
+          LEFT JOIN
+                    priority_v
+                    ON
+                              (
+                                        invoice_line_detail.priority_id = priority_v.oid
+                              )
+          )
+          LEFT JOIN
+                    category_v
+                    ON
+                              (
+                                        invoice_line_detail.category_id = category_v.oid
+                              )
+          )
+          LEFT JOIN
+                    dmn_v
+                    ON
+                              (
+                                        invoice_line_detail.dmn_id = dmn_v.oid
+                              )
+          )
+          LEFT JOIN
+                    invoice_section
+                    ON
+                              (
+                                        invoice.oid = invoice_section.invoice_id
+                              )
+          )
+          LEFT JOIN
+                    task
+                    ON
+                              (
+                                        invoice_section.task_id = task.oid
+                              )
+          )
+          LEFT JOIN
+                    task_stats
+                    ON
+                              (
+                                        task.oid = task_stats.task_id
+                              )
+          )
+          LEFT JOIN
+                    discount
+                    ON
+                              (
+                                        invoice.discount_id = discount.oid
+                              )
+          )
+          LEFT JOIN
+                    customer
+                    ON
+                              (
+                                        invoice.customer_id = customer.oid
+                              )
+          )
+          LEFT JOIN
+                    business_unit
+                    ON
+                              (
+                                        customer.oid = business_unit.customer_id
+                              )
+          )
+          LEFT JOIN
+                    request
+                    ON
+                              (
+                                        invoice_section.request_id = request.oid
+                              )
+          )
+          LEFT JOIN
+                    project
+                    ON
+                              (
+                                        request.project_id = project.oid
+                              )
+          )
+          LEFT JOIN
+                    custom_field_value_v custom_field_value_v_project
+                    ON
+                              (
+                                        project.oid = custom_field_value_v_project.project_id
+                              )
+WHERE
+          (
+                    (
+                              invoice.quotation=0
+                              AND
+                              (
+                                        (
+                                                  @P_Provider_Customer         ='Customer'
+                                                  AND invoice.payable=0
+                                        )
+                                        OR
+                                        (
+                                                  @P_Provider_Customer        ='Provider'
+                                                  AND invoice.payable=1
+                                        )
+                              )
+                              AND
+                              (
+                                        @P_Invoice_Sent IS NULL
+                                        OR @P_Invoice_Sent    ='All'
+                                        OR
+                                        (
+                                                  (
+                                                            @P_Invoice_Sent           ='Sent'
+                                                            AND invoice.sent=1
+                                                  )
+                                                  OR
+                                                  (
+                                                            @P_Invoice_Sent           ='Not Sent'
+                                                            AND invoice.sent=0
+                                                  )
+                                        )
+                              )
+                              AND
+                              (
+                                        @P_Invoice_Paid IS NULL
+                                        OR @P_Invoice_Paid    ='All'
+                                        OR
+                                        (
+                                                  (
+                                                            @P_Invoice_Paid               ='Paid'
+                                                            AND invoice.received=1
+                                                  )
+                                                  OR
+                                                  (
+                                                            @P_Invoice_Paid               ='Not Paid'
+                                                            AND invoice.received=0
+                                                  )
+                                        )
+                              )
+                              AND
+                              (
+                                        (
+                                                  @P_Date_From IS NULL
+                                                  OR invoice.invoice_date        &gt;=@P_Date_From
+                                        )
+                                        AND
+                                        (
+                                                  @P_Date_To IS NULL
+                                                  OR invoice.invoice_date        &lt;=@P_Date_To
+                                        )
+                              )
+                              AND
+                              (
+                                        service_v.oid IS NULL
+                                        OR service_v.mapkey ='en'
+                              )
+                              AND
+                              (
+                                        category_v.oid IS NULL
+                                        OR category_v.mapkey ='en'
+                              )
+                              AND
+                              (
+                                        currency_v.oid IS NULL
+                                        OR currency_v.mapkey ='en'
+                              )
+                              AND
+                              (
+                                        dmn_v.oid IS NULL
+                                        OR dmn_v.mapkey ='en'
+                              )
+                              AND
+                              (
+                                        priority_v.oid       IS NULL
+                                        OR priority_v.name_language='en'
+                              )
+                              AND
+                              (
+                                        unit_v.oid IS NULL
+                                        OR unit_v.mapkey ='en'
+                              )
+                              AND
+                              (
+                                        address_v.oid IS NULL
+                                        OR address_v.mapkey ='en'
+                              )
+                              AND
+                              (
+                                        custom_field_value_v_project.custom_field_value_id IS NULL
+                                        OR custom_field_value_v_project.mapkey                   ='en'
+                              )
+                              AND
+                              (
+                                        @P_Hidden_Provider_Numeric     IS NULL
+                                        OR @P_Hidden_Provider_Numeric        =0
+                                        OR provider.oid=NULL
+                              )
+                              AND
+                              (
+                                        @P_Hidden_Customer_Numeric     IS NULL
+                                        OR @P_Hidden_Customer_Numeric        =0
+                                        OR customer.oid=NULL
+                              )
+                    )
+          )</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="customer_reference">
+        <DataField>customer_reference</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="customer_name">
+        <DataField>customer_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="project_active">
+        <DataField>project_active</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="project_reception_date">
+        <DataField>project_reception_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="project_delivery_date">
+        <DataField>project_delivery_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="project_code">
+        <DataField>project_code</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="project_name">
+        <DataField>project_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="project_description">
+        <DataField>project_description</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="dmn_v_elmnt">
+        <DataField>dmn_v_elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="contact_notification_email">
+        <DataField>contact_notification_email</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="contact_last_name">
+        <DataField>contact_last_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="contact_first_name">
+        <DataField>contact_first_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="invoice_received">
+        <DataField>invoice_received</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="invoice_facture_no">
+        <DataField>invoice_facture_no</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="invoice_lang">
+        <DataField>invoice_lang</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="invoice_oid">
+        <DataField>invoice_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="invoice_sent_date">
+        <DataField>invoice_sent_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="invoice_note">
+        <DataField>invoice_note</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="invoice_payable">
+        <DataField>invoice_payable</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="invoice_sent">
+        <DataField>invoice_sent</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="invoice_sub_total_before_discount">
+        <DataField>invoice_sub_total_before_discount</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="invoice_sub_total_before_tax">
+        <DataField>invoice_sub_total_before_tax</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="invoice_total">
+        <DataField>invoice_total</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="invoice_invoice_date">
+        <DataField>invoice_invoice_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="address_v_country_code">
+        <DataField>address_v_country_code</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="address_v_timezone">
+        <DataField>address_v_timezone</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="address_v_country_name">
+        <DataField>address_v_country_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="address_v_po_box">
+        <DataField>address_v_po_box</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="address_v_country_local_name">
+        <DataField>address_v_country_local_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="address_v_fax">
+        <DataField>address_v_fax</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="address_v_postal_code">
+        <DataField>address_v_postal_code</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="address_v_telephone">
+        <DataField>address_v_telephone</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="address_v_line2">
+        <DataField>address_v_line2</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="address_v_line1">
+        <DataField>address_v_line1</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="address_v_name">
+        <DataField>address_v_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="address_v_city">
+        <DataField>address_v_city</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="unit_v_elmnt">
+        <DataField>unit_v_elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="business_unit_code">
+        <DataField>business_unit_code</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="business_unit_name">
+        <DataField>business_unit_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="custom_field_value_v_project_name">
+        <DataField>custom_field_value_v_project_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="custom_field_value_v_project_unique_identifier">
+        <DataField>custom_field_value_v_project_unique_identifier</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="custom_field_value_v_project_description">
+        <DataField>custom_field_value_v_project_description</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="custom_field_value_v_project_value">
+        <DataField>custom_field_value_v_project_value</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="payable_invoice_paid">
+        <DataField>payable_invoice_paid</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="payable_invoice_sent">
+        <DataField>payable_invoice_sent</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="payable_invoice_sent_date">
+        <DataField>payable_invoice_sent_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="service_v_elmnt">
+        <DataField>service_v_elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="invoice_reference_numbers_v_reference_numbers">
+        <DataField>invoice_reference_numbers_v_reference_numbers</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="category_v_elmnt">
+        <DataField>category_v_elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="invoice_purchase_orders_v_purchase_orders">
+        <DataField>invoice_purchase_orders_v_purchase_orders</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="provider_last_name">
+        <DataField>provider_last_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="provider_first_name">
+        <DataField>provider_first_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="provider_time_zone">
+        <DataField>provider_time_zone</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="provider_company_name">
+        <DataField>provider_company_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="provider_active">
+        <DataField>provider_active</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="provider_provider_affiliation">
+        <DataField>provider_provider_affiliation</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="currency_v_elmnt">
+        <DataField>currency_v_elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="currency_v_code">
+        <DataField>currency_v_code</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="currency_v_exchange_rate">
+        <DataField>currency_v_exchange_rate</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="currency_v_symbol">
+        <DataField>currency_v_symbol</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="PaidStatus">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <CommandText>
+		select 'All' as label, 'All' as value, 'en' as language
+		union	
+		select 'Todos' as label, 'All' as value, 'es' as language
+		union  
+		select 'Alle' as label, 'All' as value, 'de' as language
+		union  
+		select 'Tous' as label, 'All' as value, 'fr' as language
+		union	
+		select 'Paid' as label, 'Paid' as value, 'en' as language
+		union	
+		select 'Pagado' as label, 'Paid' as value, 'es' as language
+		union  
+		select 'Bezahlt' as label, 'Paid' as value, 'de' as language
+		union  
+		select 'Payé' as label, 'Paid' as value, 'fr' as language
+		union
+		select 'Not Paid' as label, 'Not Paid' as value, 'en' as language
+		union
+		select 'No pagado' as label, 'Not Paid' as value, 'es' as language
+		union
+		select 'Nicht bezahlt' as label, 'Not Paid' as value, 'de' as language
+		union
+		select 'Pas payé' as label, 'Not Paid' as value, 'fr' as language	
+	</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="label">
+        <DataField>label</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="value">
+        <DataField>value</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="language">
+        <DataField>language</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>      
+    </Fields>
+  </DataSet>
+</SharedDataSet>

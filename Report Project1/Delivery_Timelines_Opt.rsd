@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@Language">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Currency_Code">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Provider_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Customer_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Compl_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Compl_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT DISTINCT language_request_target_v.short_name AS language_request_target_v_short_name, request.completed_date AS request_completed_date, request.oid AS request_oid, request.request_no AS request_request_no, request.delivery_date AS request_delivery_date
+FROM   request LEFT OUTER JOIN
+             work_flow ON request.oid = work_flow.request_id LEFT OUTER JOIN
+             language_request_target_v ON request.oid = language_request_target_v.oid LEFT OUTER JOIN
+             customer ON request.customer_id = customer.oid LEFT OUTER JOIN
+             step ON work_flow.oid = step.workflow_work_flow_id LEFT OUTER JOIN
+             task ON step.oid = task.step_id LEFT OUTER JOIN
+             provider ON task.provider_id = provider.oid
+WHERE (request.model = 0) AND (step.deleted = 0) AND (language_request_target_v.oid IS NULL OR
+             language_request_target_v.mapkey = @Language) AND (@P_Req_Rcpt_Date_From IS NULL OR
+             request.reception_date &gt;= @P_Req_Rcpt_Date_From) AND (@P_Req_Rcpt_Date_To IS NULL OR
+             request.reception_date &lt;= @P_Req_Rcpt_Date_To) AND (@P_Hidden_Provider_Numeric IS NULL OR
+             @P_Hidden_Provider_Numeric = 0 OR
+             provider.oid = @P_Hidden_Provider_Numeric) AND (@P_Hidden_Customer_Numeric IS NULL OR
+             @P_Hidden_Customer_Numeric = 0 OR
+             customer.oid = @P_Hidden_Customer_Numeric) AND (@P_Req_Compl_Date_From IS NULL OR
+             request.completed_date &gt;= @P_Req_Compl_Date_From) AND (@P_Req_Compl_Date_To IS NULL OR
+             request.completed_date &lt;= @P_Req_Compl_Date_To)</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="language_request_target_v_short_name">
+        <DataField>language_request_target_v_short_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_completed_date">
+        <DataField>request_completed_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="request_oid">
+        <DataField>request_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="request_request_no">
+        <DataField>request_request_no</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_delivery_date">
+        <DataField>request_delivery_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

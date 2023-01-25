@@ -1,0 +1,3218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="Flow">
+      <DataSourceReference>Flow</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>ee549419-2b5a-49c1-8d3e-bee4e149db03</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="Localizations">
+      <SharedDataSet>
+        <SharedDataSetReference>Localizations</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="translation">
+          <DataField>translation</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="language">
+          <DataField>language</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!language.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Code.UserLanguageCode()</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+    <DataSet Name="PaidStatus">
+      <SharedDataSet>
+        <SharedDataSetReference>PaidStatus</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="label">
+          <DataField>label</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="value">
+          <DataField>value</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="language">
+          <DataField>language</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!language.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Code.UserLanguageCode()</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+    <DataSet Name="ProviderCustomer">
+      <SharedDataSet>
+        <SharedDataSetReference>ProviderCustomer</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="label">
+          <DataField>label</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="value">
+          <DataField>value</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="language">
+          <DataField>language</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!language.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Code.UserLanguageCode()</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+    <DataSet Name="SentStatus">
+      <SharedDataSet>
+        <SharedDataSetReference>SentStatus</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="label">
+          <DataField>label</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="value">
+          <DataField>value</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="language">
+          <DataField>language</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!language.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Code.UserLanguageCode()</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+    <DataSet Name="Invoice_Status">
+      <SharedDataSet>
+        <SharedDataSetReference>Invoice_Status</SharedDataSetReference>
+        <QueryParameters>
+          <QueryParameter Name="@P_Currency_Code_Multiple">
+            <Value>=Parameters!P_Currency_Code_Multiple.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@P_Provider_Customer">
+            <Value>=Parameters!P_Provider_Customer.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@P_Invoice_Sent">
+            <Value>=Parameters!P_Invoice_Sent.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@P_Invoice_Paid">
+            <Value>=Parameters!P_Invoice_Paid.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@P_Date_From">
+            <Value>=Parameters!P_Date_From.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@P_Date_To">
+            <Value>=Parameters!P_Date_To.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Language">
+            <Value>=Parameters!Language.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@P_Hidden_Provider_Numeric">
+            <Value>=Parameters!P_Hidden_Provider_Numeric.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@P_Hidden_Customer_Numeric">
+            <Value>=Parameters!P_Hidden_Customer_Numeric.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="name">
+          <DataField>name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="last_name">
+          <DataField>last_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="first_name">
+          <DataField>first_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="facture_no">
+          <DataField>facture_no</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sent">
+          <DataField>sent</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="payable">
+          <DataField>payable</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="sub_total_before_tax">
+          <DataField>sub_total_before_tax</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="sent_date">
+          <DataField>sent_date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="received">
+          <DataField>received</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="country_name">
+          <DataField>country_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="payable_invoice_sent_date">
+          <DataField>payable_invoice_sent_date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="paid">
+          <DataField>paid</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="payable_invoice_sent">
+          <DataField>payable_invoice_sent</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="purchase_orders">
+          <DataField>purchase_orders</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="notification_email">
+          <DataField>notification_email</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="agency_name">
+          <DataField>agency_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="provider_first_name">
+          <DataField>provider_first_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="company_name">
+          <DataField>company_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="provider_last_name">
+          <DataField>provider_last_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="symbol">
+          <DataField>symbol</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="code">
+          <DataField>code</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Currency">
+      <SharedDataSet>
+        <SharedDataSetReference>CurrencyDataSet</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="label">
+          <DataField>label</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="value">
+          <DataField>value</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="CurrencySymbol">
+      <SharedDataSet>
+        <SharedDataSetReference>CurrencySymbol</SharedDataSetReference>
+        <QueryParameters>
+          <QueryParameter Name="@Currency">
+            <Value>=Parameters!P_Currency_Code_Multiple.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="CurrencySymbol">
+          <DataField>CurrencySymbol</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Default_Currency">
+      <SharedDataSet>
+        <SharedDataSetReference>Default_Currency</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="oid">
+          <DataField>oid</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ReportStyle">
+      <SharedDataSet>
+        <SharedDataSetReference>ReportStyle</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StyleName">
+          <DataField>StyleName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TableHeaderForeColor">
+          <DataField>TableHeaderForeColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TableHeaderBackColor">
+          <DataField>TableHeaderBackColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TableSubHeaderForeColor">
+          <DataField>TableSubHeaderForeColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ToogleRowBackColor1">
+          <DataField>ToogleRowBackColor1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ToogleRowBackColor2">
+          <DataField>ToogleRowBackColor2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TableSubHeaderBackColor">
+          <DataField>TableSubHeaderBackColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Font">
+          <DataField>Font</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FontSize">
+          <DataField>FontSize</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FontColor">
+          <DataField>FontColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BorderColor">
+          <DataField>BorderColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BorderStyle">
+          <DataField>BorderStyle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BorderWidth">
+          <DataField>BorderWidth</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BackGroundColor">
+          <DataField>BackGroundColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PaletteColor1">
+          <DataField>PaletteColor1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Activestatus">
+          <DataField>Activestatus</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PaletteColor2">
+          <DataField>PaletteColor2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PaletteColor3">
+          <DataField>PaletteColor3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PaletteColor4">
+          <DataField>PaletteColor4</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PaletteColor5">
+          <DataField>PaletteColor5</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ChartFontSize">
+          <DataField>ChartFontSize</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HeaderForeColor">
+          <DataField>HeaderForeColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HeaderBackColor">
+          <DataField>HeaderBackColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HeaderFont">
+          <DataField>HeaderFont</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HeaderFontSize">
+          <DataField>HeaderFontSize</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FooterForeColor">
+          <DataField>FooterForeColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FooterBackColor">
+          <DataField>FooterBackColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FooterFont">
+          <DataField>FooterFont</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FooterFontSize">
+          <DataField>FooterFontSize</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FooterLogoIcon">
+          <DataField>FooterLogoIcon</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LogoImage">
+          <DataField>LogoImage</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>4.35714cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox44">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>90+ days overdue</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableSubHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox44</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableSubHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>8</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Invoice No</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox400">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			    LookUp("Should be hidden", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																				LookUp("Agency", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox400</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			    LookUp("Customer", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																				LookUp("Provider", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			   LookUp("Contact", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																			   LookUp("Company", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox8">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Country</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox10">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			    LookUp("Purchase Order", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																			    LookUp("Email", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <rd:Selected>true</rd:Selected>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox12">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Sent Date</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox12</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox14">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Amount</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox14</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="facture_no">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!facture_no.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>facture_no</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox50">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer","Should be hidden", Fields!agency_name.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox50</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",Fields!name.Value,Fields!provider_first_name.Value &amp; ", " &amp; Fields!provider_last_name.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox7">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",Fields!last_name.Value &amp; ", " &amp; Fields!first_name.Value,Fields!company_name.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="country_name">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!country_name.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>country_name</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox11">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",Fields!purchase_orders.Value,Fields!notification_email.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox13">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!sent_date.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox13</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="sub_total_before_tax">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.FormatAmountAndCurrencySymbol(Fields!sub_total_before_tax.Value, Fields!symbol.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>sub_total_before_tax</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=LookUp("Total for Currency:", Fields!id.Value, Fields!translation.Value, "Localizations") &amp; " " &amp; Fields!code.Value &amp; " " &amp; Fields!symbol.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableSubHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableSubHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>7</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="sub_total_before_tax6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.FormatAmountAndCurrencySymbol(Sum(Fields!sub_total_before_tax.Value), Fields!symbol.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableSubHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>sub_total_before_tax6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableSubHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember>
+                  <Visibility>
+                    <Hidden>=Parameters!P_Provider_Customer.Value="Customer"</Hidden>
+                  </Visibility>
+                </TablixMember>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="symbol">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!code.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!code.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>Invoice_Status</DataSetName>
+            <Filters>
+              <Filter>
+                <FilterExpression>=iif(DateDiff("d",Fields!sent_date.Value, now())&gt;=90 and DateDiff("d",Fields!sent_date.Value,Now())&lt;=99999999,1,0)</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue DataType="Integer">1</FilterValue>
+                </FilterValues>
+              </Filter>
+              <Filter>
+                <FilterExpression>=IsDate(Fields!sent_date.Value)</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue DataType="Boolean">true</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+            <SortExpressions>
+              <SortExpression>
+                <Value>=Fields!name.Value</Value>
+              </SortExpression>
+            </SortExpressions>
+            <Top>2.1cm</Top>
+            <Left>0.1cm</Left>
+            <Height>2.8cm</Height>
+            <Width>31.35712cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Tablix Name="Tablix2">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>4.35714cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox51">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>60+ days overdue</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableSubHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox51</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableSubHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>8</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Invoice No</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox90">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			    LookUp("Should be hidden", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																				LookUp("Agency", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox90</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox9">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			    LookUp("Customer", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																				LookUp("Provider", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox15">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			   LookUp("Contact", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																			   LookUp("Company", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox22">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Country</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox23">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			    LookUp("Purchase Order", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																			    LookUp("Email", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox24">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Sent Date</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox12</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox25">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Amount</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox14</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="facture_no2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!facture_no.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>facture_no</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox260">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value = "Customer", "Should be hidden", Fields!agency_name.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox260</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox26">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value = "Customer", Fields!name.Value, Fields!provider_first_name.Value &amp; ", " &amp; Fields!provider_last_name.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox27">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value = "Customer", Fields!last_name.Value &amp; ", " &amp; Fields!first_name.Value, Fields!company_name.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="country_name2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!country_name.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>country_name</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox28">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value = "Customer", Fields!purchase_orders.Value, Fields!notification_email.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox29">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!sent_date.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox13</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="sub_total_before_tax2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.FormatAmountAndCurrencySymbol(Fields!sub_total_before_tax.Value, Fields!symbol.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>sub_total_before_tax</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox62">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=LookUp("Total for Currency:", Fields!id.Value, Fields!translation.Value, "Localizations") &amp; " " &amp; Fields!code.Value &amp; " " &amp; Fields!symbol.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableSubHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox62</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableSubHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>7</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox68">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.FormatAmountAndCurrencySymbol(Sum(Fields!sub_total_before_tax.Value), Fields!symbol.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableSubHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox68</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableSubHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember>
+                  <Visibility>
+                    <Hidden>=Parameters!P_Provider_Customer.Value="Customer"</Hidden>
+                  </Visibility>
+                </TablixMember>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details2" />
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="code">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!code.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!code.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>Invoice_Status</DataSetName>
+            <Filters>
+              <Filter>
+                <FilterExpression>=iif(DateDiff("d", Fields!sent_date.Value,  now()) &gt;= 60 And DateDiff("d", Fields!sent_date.Value, Now()) &lt; 90, 1, 0)</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue DataType="Integer">1</FilterValue>
+                </FilterValues>
+              </Filter>
+              <Filter>
+                <FilterExpression>=IsDate(Fields!sent_date.Value)</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue DataType="Boolean">true</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+            <SortExpressions>
+              <SortExpression>
+                <Value>=Fields!name.Value</Value>
+              </SortExpression>
+            </SortExpressions>
+            <Top>6cm</Top>
+            <Left>0.1cm</Left>
+            <Height>2.8cm</Height>
+            <Width>31.35712cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Tablix Name="Tablix3">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.85714cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>4.35714cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox52">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>30+ days overdue</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableSubHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox51</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableSubHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>8</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox36">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Invoice No</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox370">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			    LookUp("Should be hidden", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																				LookUp("Agency", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox370</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox37">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			    LookUp("Customer", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																				LookUp("Provider", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox38">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			   LookUp("Contact", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																			   LookUp("Company", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox39">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Country</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox40">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value="Customer",
+																			    LookUp("Purchase Order", Fields!id.Value, Fields!translation.Value, "Localizations"),
+																			    LookUp("Email", Fields!id.Value, Fields!translation.Value, "Localizations"))</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox41">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Sent Date</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox12</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox42">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Amount</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox14</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="facture_no3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!facture_no.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>facture_no</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox430">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value = "Customer", "Should be hidden", Fields!agency_name.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox430</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox43">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value = "Customer", Fields!name.Value, Fields!provider_first_name.Value &amp; ", " &amp; Fields!provider_last_name.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox45">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value = "Customer", Fields!last_name.Value &amp; ", " &amp; Fields!first_name.Value, Fields!company_name.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="country_name3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!country_name.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>country_name</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox46">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIf(Parameters!P_Provider_Customer.Value = "Customer", Fields!purchase_orders.Value, Fields!notification_email.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox47">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!sent_date.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox13</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="sub_total_before_tax4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.FormatAmountAndCurrencySymbol(Fields!sub_total_before_tax.Value, Fields!symbol.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>sub_total_before_tax</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=IIF(RUNNINGVALUE (Fields!facture_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox69">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=LookUp("Total for Currency:", Fields!id.Value, Fields!translation.Value, "Localizations") &amp; " " &amp; Fields!code.Value &amp; " " &amp; Fields!symbol.Value</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableSubHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox69</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableSubHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>7</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox75">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Code.FormatAmountAndCurrencySymbol(Sum(Fields!sub_total_before_tax.Value), Fields!symbol.Value)</Value>
+                                  <Style>
+                                    <FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+                                    <FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+                                    <Color>=First(Fields!TableSubHeaderForeColor.Value, "ReportStyle")</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox75</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+                              <Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+                              <Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+                            </Border>
+                            <BackgroundColor>=First(Fields!TableSubHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember>
+                  <Visibility>
+                    <Hidden>=Parameters!P_Provider_Customer.Value="Customer"</Hidden>
+                  </Visibility>
+                </TablixMember>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details3" />
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="code1">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!code.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!code.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>Invoice_Status</DataSetName>
+            <Filters>
+              <Filter>
+                <FilterExpression>=iif(DateDiff("d", Fields!sent_date.Value, now) &gt;= 30 And DateDiff("d", Fields!sent_date.Value, Now) &lt; 60, 1, 0)</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue DataType="Integer">1</FilterValue>
+                </FilterValues>
+              </Filter>
+              <Filter>
+                <FilterExpression>=IsDate(Fields!sent_date.Value)</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue DataType="Boolean">true</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+            <SortExpressions>
+              <SortExpression>
+                <Value>=Fields!name.Value</Value>
+              </SortExpression>
+            </SortExpressions>
+            <Top>9.8cm</Top>
+            <Left>0.1cm</Left>
+            <Height>2.8cm</Height>
+            <Width>31.35712cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Subreport Name="Header">
+            <ReportName>Header</ReportName>
+            <Parameters>
+              <Parameter Name="HeaderForeColor">
+                <Value>=First(Fields!HeaderForeColor.Value, "ReportStyle")</Value>
+              </Parameter>
+              <Parameter Name="HeaderBackColor">
+                <Value>=First(Fields!HeaderBackColor.Value, "ReportStyle")</Value>
+              </Parameter>
+              <Parameter Name="HeaderFont">
+                <Value>=First(Fields!HeaderFont.Value, "ReportStyle")</Value>
+              </Parameter>
+              <Parameter Name="HeaderFontSize">
+                <Value>=First(Fields!HeaderFontSize.Value, "ReportStyle")</Value>
+              </Parameter>
+              <Parameter Name="LogoImage">
+                <Value>=First(Fields!LogoImage.Value, "ReportStyle")</Value>
+              </Parameter>
+              <Parameter Name="ReportName">
+                <Value>=Globals!ReportName</Value>
+              </Parameter>
+            </Parameters>
+            <Height>2cm</Height>
+            <Width>27.7cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <FontFamily />
+            </Style>
+          </Subreport>
+          <Subreport Name="Footer">
+            <ReportName>Footer</ReportName>
+            <Parameters>
+              <Parameter Name="ExecutionTime">
+                <Value>=Globals!ExecutionTime</Value>
+              </Parameter>
+              <Parameter Name="FooterForeColor">
+                <Value>=First(Fields!FooterForeColor.Value, "ReportStyle")</Value>
+              </Parameter>
+              <Parameter Name="FooterBackColor">
+                <Value>=First(Fields!FooterBackColor.Value, "ReportStyle")</Value>
+              </Parameter>
+              <Parameter Name="FooterFont">
+                <Value>=First(Fields!FooterFont.Value, "ReportStyle")</Value>
+              </Parameter>
+              <Parameter Name="FooterFontSize">
+                <Value>=First(Fields!FooterFontSize.Value, "ReportStyle")</Value>
+              </Parameter>
+              <Parameter Name="FooterLogoIcon">
+                <Value>=First(Fields!FooterLogoIcon.Value, "ReportStyle")</Value>
+              </Parameter>
+            </Parameters>
+            <Top>12.7cm</Top>
+            <Height>1cm</Height>
+            <Width>27.7cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <FontFamily />
+            </Style>
+          </Subreport>
+        </ReportItems>
+        <Height>13.7cm</Height>
+        <Style />
+      </Body>
+      <Width>31.45712cm</Width>
+      <Page>
+        <PageHeight>21cm</PageHeight>
+        <PageWidth>29.7cm</PageWidth>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>1cm</TopMargin>
+        <BottomMargin>1cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="P_Date_From">
+      <DataType>DateTime</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>Date From:</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="P_Date_To">
+      <DataType>DateTime</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>Date To:</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="P_Invoice_Sent">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>All</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Sent Status:</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>SentStatus</DataSetName>
+          <ValueField>value</ValueField>
+          <LabelField>label</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="P_Invoice_Paid">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value>All</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Paid Status:</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>PaidStatus</DataSetName>
+          <ValueField>value</ValueField>
+          <LabelField>label</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="P_Provider_Customer">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Customer</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Invoice to:</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ProviderCustomer</DataSetName>
+          <ValueField>value</ValueField>
+          <LabelField>label</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="P_Currency_Code_Multiple">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>Currency</DataSetName>
+          <ValueField>value</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Currency:</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Currency</DataSetName>
+          <ValueField>value</ValueField>
+          <LabelField>label</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Language">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value>en</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Language</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+    <ReportParameter Name="P_Hidden_Customer_Numeric">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>P Hidden Customer Numeric</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+    <ReportParameter Name="P_Hidden_Provider_Numeric">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>P Hidden Provider Numeric</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>3</NumberOfColumns>
+      <NumberOfRows>4</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>P_Date_From</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>P_Date_To</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>P_Invoice_Sent</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>P_Invoice_Paid</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>P_Provider_Customer</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>P_Currency_Code_Multiple</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>Language</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>P_Hidden_Customer_Numeric</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>P_Hidden_Provider_Numeric</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+	<Language>en-US</Language>
+	<ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+	<rd:ReportUnitType>Cm</rd:ReportUnitType>
+	<rd:ReportID>14db7e3e-5977-4143-ba12-08eeeb334324</rd:ReportID>  <Code>
+	
+	Public Function FormatAmountAndCurrencySymbolString(currencySymbol As String) As String
+			
+		Dim langCode as String
+		langCode = UCase(UserLanguageCode())
+		
+		Dim englishLangCode as String
+		englishLangCode = "EN"
+		
+		Dim result as String
+		If (englishLangCode = langCode) Then
+			result = "'" &amp; currencySymbol &amp; "'#,0.00" &amp; ";('" &amp; currencySymbol &amp; "'0.00)"
+		Else
+			result = "#,0.00 " &amp; "'" &amp; currencySymbol &amp; "';(0.00 " &amp; "'" &amp; currencySymbol &amp; "')"
+		End If
+		
+		Return result
+	End Function
+				
+	Public Function FormatAmountAndCurrencySymbol(amount as Double, currencySymbol As String) As String
+			
+		Dim langCode as String
+		langCode = UCase(UserLanguageCode())
+		
+		Dim formattedAmount = Format(amount,"#,0.00;(#,0.00)") 
+		
+		Dim englishLangCode as String
+		englishLangCode = "EN"
+		
+		Dim result as String
+		If (englishLangCode = langCode) Then
+			result = currencySymbol &amp; formattedAmount
+		Else
+			result = formattedAmount &amp; " " &amp; currencySymbol
+		End If
+		
+		Return result
+	End Function
+			
+	Public Function UserLanguageCode() As String
+		Return Report.User.Language.Substring(0,2)
+	End Function
+	
+	Public Function BuildAgencyAndProviderName(agencyName As String, providerFirstName As String, providerLastName As String) As String
+	
+		Dim result as String
+		result = ""
+		if (Not String.IsNullOrEmpty(agencyName)) Then
+			result = "(" &amp; agencyName &amp; ") "
+		End If
+	
+		Return result &amp; providerLastName &amp; ", " &amp; providerFirstName
+	End Function
+	</Code>
+  
+</Report>

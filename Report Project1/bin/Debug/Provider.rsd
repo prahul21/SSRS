@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Description />
+  <DataSet Name="Provider">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@P_Hidden_Provider_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+        </DataSetParameter>
+        <DataSetParameter Name="@Language">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+        </DataSetParameter>
+      </DataSetParameters>
+		<CommandText> 
+			SELECT 
+				currency.code, contract.type, contract.bonus, contract.payments_total, contract.contract_end_date, contract.deductions, 
+				contract.contract_start_date, provider.notification_email, 
+				provider.active, agency.first_name agency_name, provider.first_name, provider.provider_affiliation, provider.time_zone, 
+			    provider.last_name, provider.company_name, province.local_name, address.city, country_v.elmnt
+			FROM   
+				provider LEFT OUTER JOIN address ON provider.address_id = address.oid 
+				LEFT OUTER JOIN country_v ON address.country_id = country_v.oid 
+				LEFT OUTER JOIN province ON address.province_id = province.oid 
+				LEFT OUTER JOIN contract ON provider.oid = contract.provider_id 
+				LEFT OUTER JOIN contract_detail ON contract.oid = contract_detail.contract_id 
+				LEFT OUTER JOIN contract_details_note ON contract.oid = contract_details_note.oid 
+				LEFT OUTER JOIN currency ON provider.currency_id = currency.oid
+				left outer join provider agency on provider.agency_provider_id = agency.oid 
+			WHERE (address.country_id IS NULL OR country_v.mapkey = @Language) AND 
+				  (@P_Hidden_Provider_Numeric IS NULL OR @P_Hidden_Provider_Numeric = 0 OR provider.oid = @P_Hidden_Provider_Numeric) and
+				  (agency.provider_affiliation is null or agency.provider_affiliation = 3) 
+		</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="code">
+        <DataField>code</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="type">
+        <DataField>type</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="bonus">
+        <DataField>bonus</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="payments_total">
+        <DataField>payments_total</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="contract_end_date">
+        <DataField>contract_end_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="deductions">
+        <DataField>deductions</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="contract_start_date">
+        <DataField>contract_start_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="notification_email">
+        <DataField>notification_email</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="active">
+        <DataField>active</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="agency_name">
+        <DataField>agency_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>      
+      <Field Name="first_name">
+        <DataField>first_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="provider_affiliation">
+        <DataField>provider_affiliation</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="time_zone">
+        <DataField>time_zone</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="last_name">
+        <DataField>last_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="company_name">
+        <DataField>company_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="local_name">
+        <DataField>local_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="city">
+        <DataField>city</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="elmnt">
+        <DataField>elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Full_Name">
+        <Value>=Fields!last_name.Value &amp; ", " &amp; Fields!first_name.Value</Value>
+      </Field>
+      <Field Name="City_Country">
+        <Value>=IIf (Len(Fields!city.Value) &lt;= 0 Or Len(Fields!elmnt.Value) &lt;= 0, Fields!city.Value &amp; Fields!elmnt.Value, Fields!city.Value &amp; "/" &amp; Fields!elmnt.Value)</Value>
+      </Field>
+      <Field Name="Internal">
+        <Value>=IIf(Fields!provider_affiliation.Value=1,"Yes", "No")</Value>
+      </Field>
+      <Field Name="ActiveString">
+        <Value>=IIf(Fields!active.Value=0, "No", "Yes")</Value>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

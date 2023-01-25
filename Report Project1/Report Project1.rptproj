@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <FullPath>Debug</FullPath>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorLevel>2</ErrorLevel>
+    <OverwriteDatasets>False</OverwriteDatasets>
+    <OverwriteDataSources>False</OverwriteDataSources>
+    <TargetServerVersion>SSRS2016</TargetServerVersion>
+    <Platform>Win32</Platform>
+    <TargetReportFolder>Report Project1</TargetReportFolder>
+    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+    <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
+    <FullPath>DebugLocal</FullPath>
+    <OutputPath>bin\DebugLocal</OutputPath>
+    <ErrorLevel>2</ErrorLevel>
+    <OverwriteDatasets>False</OverwriteDatasets>
+    <OverwriteDataSources>False</OverwriteDataSources>
+    <TargetServerVersion>SSRS2016</TargetServerVersion>
+    <Platform>Win32</Platform>
+    <TargetReportFolder>Report Project1</TargetReportFolder>
+    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+    <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <FullPath>Release</FullPath>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorLevel>2</ErrorLevel>
+    <OverwriteDatasets>False</OverwriteDatasets>
+    <OverwriteDataSources>False</OverwriteDataSources>
+    <TargetServerVersion>SSRS2016</TargetServerVersion>
+    <Platform>Win32</Platform>
+    <TargetReportFolder>Report Project1</TargetReportFolder>
+    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+    <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+  </PropertyGroup>
+  <PropertyGroup>
+    <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRkbDI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yIiB4bWxuczpkZGwyXzI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yLzIiIHhtbG5zOmRkbDEwMF8xMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDA4L2VuZ2luZS8xMDAvMTAwIiB4bWxuczpkZGwyMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAiIHhtbG5zOmRkbDIwMF8yMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAvMjAwIiB4bWxuczpkZGwzMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAiIHhtbG5zOmRkbDMwMF8zMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAvMzAwIiB4bWxuczpkZGw0MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAiIHhtbG5zOmRkbDQwMF80MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAvNDAwIiB4bWxuczpkZGw1MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAiIHhtbG5zOmRkbDUwMF81MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAvNTAwIiB4bWxuczpkd2Q9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vRGF0YVdhcmVob3VzZS9EZXNpZ25lci8xLjAiPg0KICA8RW5hYmxlZD5mYWxzZTwvRW5hYmxlZD4NCiAgPFByb2plY3ROYW1lPjwvUHJvamVjdE5hbWU+DQogIDxBdXhQYXRoPjwvQXV4UGF0aD4NCiAgPExvY2FsUGF0aD48L0xvY2FsUGF0aD4NCiAgPFByb3ZpZGVyPjwvUHJvdmlkZXI+DQo8L1NvdXJjZUNvbnRyb2xJbmZvPg==</State>
+    <DataSources>@(DataSource)</DataSources>
+    <DataSets>@(DataSet)</DataSets>
+    <Reports>@(Report)</Reports>
+  </PropertyGroup>
+  <ItemGroup>
+    <DataSet Include="ApprovalStatus.rsd" />
+    <DataSet Include="Country-level Spend Analysis.rsd" />
+    <DataSet Include="CurrencyDataSet.rsd" />
+    <DataSet Include="CurrencySymbol.rsd" />
+    <DataSet Include="Default_Currency.rsd" />
+    <DataSet Include="Delivery_Timelines_Opt.rsd" />
+    <DataSet Include="Finacial_Reports_Projects.rsd" />
+    <DataSet Include="Financial_Reports_Invoices.rsd" />
+    <DataSet Include="Invoice.rsd" />
+    <DataSet Include="Invoice_Charts.rsd" />
+    <DataSet Include="Invoice_Status.rsd" />
+    <DataSet Include="Localizations.rsd" />
+    <DataSet Include="MultiTrans Savings.rsd" />
+    <DataSet Include="PaidStatus.rsd" />
+    <DataSet Include="Project Basic Report.rsd" />
+    <DataSet Include="Project_Units_Cost_Price_Totals.rsd" />
+    <DataSet Include="Provider-level_Spend_Analysis.rsd" />
+    <DataSet Include="Provider.rsd" />
+    <DataSet Include="ProviderCustomer.rsd" />
+    <DataSet Include="QA_Models_and_Ratings_Customer.rsd" />
+    <DataSet Include="QA_Models_and_Ratings_Provider.rsd" />
+    <DataSet Include="Quotations.rsd" />
+    <DataSet Include="ReportOn.rsd" />
+    <DataSet Include="ReportStyle.rsd" />
+    <DataSet Include="RequestStatus.rsd" />
+    <DataSet Include="Request_Profit.rsd" />
+    <DataSet Include="Request_Reception_Years.rsd" />
+    <DataSet Include="SentStatus.rsd" />
+    <DataSet Include="Target Language-level Spend Analysis.rsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <DataSource Include="Flow.rds" />
+    <DataSource Include="Localizations.rds" />
+  </ItemGroup>
+  <ItemGroup>
+    <Report Include="Country-level Spend Analysis.rdl" />
+    <Report Include="Customer Rated Document Scores.rdl" />
+    <Report Include="Customer Scores per Language.rdl" />
+    <Report Include="Delivery Timelines.rdl" />
+    <Report Include="Detailed Customer Reported Errors.rdl" />
+    <Report Include="Detailed Provider Errors.rdl" />
+    <Report Include="Individual Provider Ratings.rdl" />
+    <Report Include="Invoice Status.rdl" />
+    <Report Include="Invoices Customer Provider Per Month.rdl" />
+    <Report Include="Invoices Customer Provider.rdl" />
+    <Report Include="Invoices Detailed.rdl" />
+    <Report Include="Invoicing by Month(s).rdl" />
+    <Report Include="Invoicing by Year(s).rdl" />
+    <Report Include="MultiTrans Savings.rdl" />
+    <Report Include="Profit per Month.rdl" />
+    <Report Include="Profit per Year.rdl" />
+    <Report Include="Profit Totals per Domain.rdl" />
+    <Report Include="Profit Totals per Domain_de.rdl" />
+    <Report Include="Project Group-level Spend Analysis.rdl" />
+    <Report Include="Projects Basic Report.rdl" />
+    <Report Include="Projects Customer per Month.rdl" />
+    <Report Include="Projects Customer per Year.rdl" />
+    <Report Include="Projects Detailed.rdl" />
+    <Report Include="Provider Ratings per Service.rdl" />
+    <Report Include="Provider-level Spend Analysis.rdl" />
+    <Report Include="Providers Report.rdl" />
+    <Report Include="Quotations Customer per Year.rdl" />
+    <Report Include="Quotations Detailed.rdl" />
+    <Report Include="Request_Profit_per_Customer.rdl" />
+    <Report Include="Source Language-level Spend Analysis.rdl" />
+    <Report Include="Target Language-level Spend Analysis.rdl" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
+</Project>

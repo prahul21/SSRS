@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="ApprovalStatus">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <CommandText>
+		select 'All' as label, 'All' as value, 'en' as language
+		union	
+		select 'Todos' as label, 'All' as value, 'es' as language
+		union  
+		select 'Alle' as label, 'All' as value, 'de' as language
+		union  
+		select 'Tous' as label, 'All' as value, 'fr' as language
+		union	
+		select 'Approved' as label, 'Approved' as value, 'en' as language
+		union	
+		select 'Aprobado' as label, 'Approved' as value, 'es' as language
+		union  
+		select 'Genehmigt' as label, 'Approved' as value, 'de' as language
+		union  
+		select 'Approuvé' as label, 'Approved' as value, 'fr' as language
+		union
+		select 'Not Approved' as label, 'Not Approved' as value, 'en' as language
+		union
+		select 'No aprobado' as label, 'Not Approved' as value, 'es' as language
+		union
+		select 'Nicht genehmigt' as label, 'Not Approved' as value, 'de' as language
+		union
+		select 'Non approuvé' as label, 'Not Approved' as value, 'fr' as language		
+	</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="label">
+        <DataField>label</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="value">
+        <DataField>value</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="language">
+        <DataField>language</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>      
+    </Fields>
+  </DataSet>
+</SharedDataSet>

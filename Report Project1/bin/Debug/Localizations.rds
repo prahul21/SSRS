@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Localizations">
+  <ConnectionProperties>
+    <Extension>XML</Extension>
+    <ConnectString>http://eseserrese.global.sdl.corp:80/ReportServer?/webdunia/Resources/localizations.xml&amp;rs:Command=GetResourceContents</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>a91acf79-e459-4a56-981d-eb2c2314db55</DataSourceID>
+</RptDataSource>

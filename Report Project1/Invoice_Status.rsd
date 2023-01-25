@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@P_Currency_Code_Multiple">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+          <rd:IsMultiValued>true</rd:IsMultiValued>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Provider_Customer">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Invoice_Sent">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Invoice_Paid">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@Language">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Provider_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Customer_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>
+		SELECT DISTINCT customer.name, contact.last_name, contact.first_name, invoice.facture_no, 
+			invoice.sent, invoice.payable, invoice.sub_total_before_tax, invoice.sent_date, invoice.received,
+			address_v.country_name, payable_invoice.sent_date AS payable_invoice_sent_date, payable_invoice.paid,
+			payable_invoice.sent AS payable_invoice_sent, invoice_purchase_orders_v.purchase_orders,
+			provider.notification_email,agency.first_name as agency_name, 
+			provider.first_name AS provider_first_name, provider.company_name,
+			provider.last_name AS provider_last_name, currency.symbol,currency.code
+		FROM invoice
+			LEFT OUTER JOIN currency ON invoice.currency_id = currency.oid
+			LEFT OUTER JOIN payable_invoice ON invoice.oid = payable_invoice.invoice_id
+			LEFT OUTER JOIN provider ON payable_invoice.provider_id = provider.oid
+			LEFT OUTER JOIN invoice_purchase_orders_v ON invoice.oid = invoice_purchase_orders_v.invoice_id
+			LEFT OUTER JOIN contact ON invoice.bill_to_contact_id = contact.oid
+			LEFT OUTER JOIN address_v ON contact.address_id = address_v.oid
+			LEFT OUTER JOIN customer ON invoice.customer_id = customer.oid
+			left outer join provider agency on provider.agency_provider_id = agency.oid 
+		WHERE 
+			(invoice.quotation = 0)	AND 
+			(currency.oid IN (@P_Currency_Code_Multiple)) AND
+			(@P_Provider_Customer = 'Customer' AND invoice.payable = 0 OR @P_Provider_Customer = 'Provider' AND invoice.payable = 1) AND 
+			(@P_Invoice_Sent IS NULL OR @P_Invoice_Sent = 'All' OR @P_Invoice_Sent = 'Sent' AND invoice.sent = 1 OR @P_Invoice_Sent = 'Not Sent' AND invoice.sent = 0) AND 
+			(@P_Invoice_Paid IS NULL OR @P_Invoice_Paid = 'All' OR @P_Invoice_Paid = 'Paid' AND invoice.received = 1 OR @P_Invoice_Paid = 'Not Paid' AND invoice.received = 0) AND 
+			(@P_Date_From IS NULL OR invoice.invoice_date &gt;= @P_Date_From) AND 
+			(@P_Date_To IS NULL	OR invoice.invoice_date &lt;= @P_Date_To) AND
+			(address_v.oid IS NULL OR address_v.mapkey = @Language)	AND 
+			(@P_Hidden_Provider_Numeric IS NULL OR @P_Hidden_Provider_Numeric = 0 OR provider.oid = @P_Hidden_Provider_Numeric)	AND
+			(@P_Hidden_Customer_Numeric IS NULL	OR @P_Hidden_Customer_Numeric = 0 OR customer.oid = @P_Hidden_Customer_Numeric)	and
+		    (agency.provider_affiliation is null or agency.provider_affiliation = 3) 
+	</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="name">
+        <DataField>name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="last_name">
+        <DataField>last_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="first_name">
+        <DataField>first_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="facture_no">
+        <DataField>facture_no</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="sent">
+        <DataField>sent</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="payable">
+        <DataField>payable</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="sub_total_before_tax">
+        <DataField>sub_total_before_tax</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="sent_date">
+        <DataField>sent_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="received">
+        <DataField>received</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="country_name">
+        <DataField>country_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="payable_invoice_sent_date">
+        <DataField>payable_invoice_sent_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="paid">
+        <DataField>paid</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="payable_invoice_sent">
+        <DataField>payable_invoice_sent</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="purchase_orders">
+        <DataField>purchase_orders</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="notification_email">
+        <DataField>notification_email</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      
+      <Field Name="agency_name">
+        <DataField>agency_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      
+      <Field Name="provider_first_name">
+        <DataField>provider_first_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="company_name">
+        <DataField>company_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="provider_last_name">
+        <DataField>provider_last_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="symbol">
+        <DataField>symbol</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="code">
+        <DataField>code</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

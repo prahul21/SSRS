@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@Language">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Currency_Code">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Provider_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Customer_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Compl_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Compl_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT DISTINCT
+
+    request_financial_stats.price
+   As 
+    request_financial_stats_price
+  ,
+ request_financial_stats.cost
+   As  request_financial_stats_cost
+  ,
+ unit_v.elmnt
+   As  unit_v_elmnt
+  ,
+ unit_v.oid
+   As  unit_v_oid
+  ,
+ contact_requested_by_business_unit.name
+   As  contact_requested_by_business_unit_name
+  ,
+ currency.symbol
+   As  currency_v_symbol
+  ,
+ language_source.short_name
+   As  language_source_short_name
+  ,
+ task_stats.qty
+   As  task_stats_qty
+  ,
+ contact_requested_by.last_name
+   As  contact_requested_by_last_name
+  ,
+ contact_requested_by.first_name
+   As  contact_requested_by_first_name
+  ,
+ language_target_request_shortname.targets
+   As  language_target_request_shortname_targets
+  ,
+ customer.name
+   As  customer_name
+  ,
+ request.reception_date
+   As  request_reception_date
+  ,
+ request.invoicing_work_flow_id
+   As  request_invoicing_work_flow_id
+  ,
+ request.title
+   As  request_title
+  ,
+ request.delivery_date
+   As  request_delivery_date
+  ,
+ request.request_no
+   As  request_request_no
+  ,
+ request.is_quotation
+   As  request_is_quotation
+  ,
+ request.completed_date
+   As  request_completed_date
+  ,
+ request_real_cost_v.real_cost
+   As  request_real_cost_v_real_cost
+  ,
+ request_real_price_v.real_price
+   As  request_real_price_v_real_price
+  ,
+ request_count_docs.doc_count
+   As  request_count_docs_doc_count
+  ,
+ global_analysis.oid
+   As  global_analysis_oid
+  ,
+ document_info_sum_units_v_global_analysis.unit
+   As  document_info_sum_units_v_global_analysis_unit
+  ,
+ document_info_sum_units_v_global_analysis.unit_qty
+   As  document_info_sum_units_v_global_analysis_unit_qty
+  ,
+ document_info_sum_units_v_global_analysis.unit_id
+   As  document_info_sum_units_v_global_analysis_unit_id
+  ,
+ dmn_v.elmnt
+   As  dmn_v_elmnt
+  ,
+ usr.name
+ As  usr_name
+
+FROM
+
+    (((((((((((((((((((((((request
+    LEFT JOIN
+        work_flow
+        ON
+            (
+                request.oid = work_flow.request_id
+            )
+    )
+    LEFT JOIN
+        global_analysis
+        ON
+            (
+                request.oid = global_analysis.request_id
+            )
+    )
+    LEFT JOIN
+        document_info_sum_units_v document_info_sum_units_v_global_analysis
+        ON
+            (
+                global_analysis.oid = document_info_sum_units_v_global_analysis.global_analysis_id
+            )
+    )
+    LEFT JOIN
+        request_documents
+        ON
+            (
+                request.oid = request_documents.request_id
+            )
+    )
+    LEFT JOIN
+        document
+        ON
+            (
+                (
+                    request_documents.documents_id = document.oid
+                    And document.reference         = 0
+                )
+            )
+    )
+    LEFT JOIN
+        work_flow_documents
+        ON
+            (
+                document.oid = work_flow_documents.documents_id
+            )
+    )
+    LEFT JOIN
+        language_request_target_v
+        ON
+            (
+                request.oid = language_request_target_v.oid
+            )
+    )
+    LEFT JOIN
+        request_real_cost_v
+        ON
+            (
+                request.oid = request_real_cost_v.request_id
+            )
+    )
+    LEFT JOIN
+        request_real_price_v
+        ON
+            (
+                request.oid = request_real_price_v.oid
+            )
+    )
+    LEFT JOIN
+        request_financial_stats
+        ON
+            (
+                request.oid = request_financial_stats.request_id
+            )
+    )
+    LEFT JOIN
+        currency
+        ON
+            (
+                request_financial_stats.currency_id = currency.oid
+            )
+    )
+    LEFT JOIN
+        request_count_docs
+        ON
+            (
+                request.oid = request_count_docs.oid
+            )
+    )
+    LEFT JOIN
+        usr
+        ON
+            (
+                request.assigned_to_usr_id = usr.oid
+            )
+    )
+    LEFT JOIN
+        language_target_request_shortname
+        ON
+            (
+                request.oid = language_target_request_shortname.oid
+            )
+    )
+    LEFT JOIN
+        language_v language_source
+        ON
+            (
+                request.source_lngge_id = language_source.oid
+            )
+    )
+    LEFT JOIN
+        contact contact_requested_by
+        ON
+            (
+                request.requested_by_contact_id = contact_requested_by.oid
+            )
+    )
+    LEFT JOIN
+        customer
+        ON
+            (
+                request.customer_id = customer.oid
+            )
+    )
+    LEFT JOIN
+        dmn_v
+        ON
+            (
+                request.dmn_id = dmn_v.oid
+            )
+    )
+    LEFT JOIN
+        step
+        ON
+            (
+                work_flow.oid = step.workflow_work_flow_id
+            )
+    )
+    LEFT JOIN
+        task
+        ON
+            (
+                step.oid = task.step_id
+            )
+    )
+    LEFT JOIN
+        provider
+        ON
+            (
+                task.provider_id = provider.oid
+            )
+    )
+    LEFT JOIN
+        task_stats
+        ON
+            (
+                task.oid = task_stats.task_id
+            )
+    )
+    LEFT JOIN
+        unit_v
+        ON
+            (
+                task_stats.unit_id = unit_v.oid
+            )
+    )
+    LEFT JOIN
+        business_unit contact_requested_by_business_unit
+        ON
+            (
+                contact_requested_by.business_unit_id = contact_requested_by_business_unit.oid
+            )
+
+WHERE
+
+    (
+        (
+            request.model   =0
+            AND step.deleted=0
+            AND
+            (
+                request.dmn_id IS NULL
+                OR dmn_v.mapkey      =@Language
+            )
+            AND
+            (
+                work_flow.oid     IS NULL
+                OR task_stats.oid IS NULL
+                OR unit_v.mapkey        =@Language
+            )
+            AND language_source.mapkey=@Language
+            AND
+            (
+                language_target_request_shortname.oid IS NULL
+                OR language_target_request_shortname.mapkey =@Language
+            )
+            AND
+            (
+                language_request_target_v.oid IS NULL
+                OR language_request_target_v.mapkey =@Language
+            )
+            AND
+            (
+                document_info_sum_units_v_global_analysis.unit_id IS NULL
+                OR document_info_sum_units_v_global_analysis.languages  =@Language
+            )
+            AND
+            (
+                @P_Req_Rcpt_Date_From IS NULL
+                OR request.reception_date      &gt;=@P_Req_Rcpt_Date_From
+            )
+            AND
+            (
+                @P_Req_Rcpt_Date_To IS NULL
+                OR request.reception_date      &lt;=@P_Req_Rcpt_Date_To
+            )
+            AND
+            (
+                request_financial_stats.currency_id IS NULL
+                OR request_financial_stats.currency_id    =@P_Currency_Code
+            )
+            AND
+            (
+                request_real_cost_v.currency_id IS NULL
+                OR request_real_cost_v.currency_id    =@P_Currency_Code
+            )
+            AND
+            (
+                request_real_price_v.currency_id IS NULL
+                OR request_real_price_v.currency_id    =@P_Currency_Code
+            )
+            AND
+            (
+                @P_Hidden_Provider_Numeric     IS NULL
+                OR @P_Hidden_Provider_Numeric        =0
+                OR provider.oid=@P_Hidden_Provider_Numeric
+            )
+            AND
+            (
+                @P_Hidden_Customer_Numeric     IS NULL
+                OR @P_Hidden_Customer_Numeric        =0
+                OR customer.oid=@P_Hidden_Customer_Numeric
+            )
+        )
+    )
+    AND
+    (
+        (
+            request.is_quotation = 0
+        )
+        AND
+        (
+            (
+                @P_Req_Compl_Date_From IS NULL
+            )
+            OR
+            (
+                request.completed_date &gt;= @P_Req_Compl_Date_From
+            )
+        )
+        AND
+        (
+            (
+                @P_Req_Compl_Date_To IS NULL
+            )
+            OR
+            (
+                request.completed_date &lt;= @P_Req_Compl_Date_To
+            )
+        )
+    )
+</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="request_financial_stats_price">
+        <DataField>request_financial_stats_price</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="request_financial_stats_cost">
+        <DataField>request_financial_stats_cost</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="unit_v_elmnt">
+        <DataField>unit_v_elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="unit_v_oid">
+        <DataField>unit_v_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="contact_requested_by_business_unit_name">
+        <DataField>contact_requested_by_business_unit_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="currency_v_symbol">
+        <DataField>currency_v_symbol</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="language_source_short_name">
+        <DataField>language_source_short_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="task_stats_qty">
+        <DataField>task_stats_qty</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="contact_requested_by_last_name">
+        <DataField>contact_requested_by_last_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="contact_requested_by_first_name">
+        <DataField>contact_requested_by_first_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="language_target_request_shortname_targets">
+        <DataField>language_target_request_shortname_targets</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="customer_name">
+        <DataField>customer_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_reception_date">
+        <DataField>request_reception_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="request_invoicing_work_flow_id">
+        <DataField>request_invoicing_work_flow_id</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="request_title">
+        <DataField>request_title</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_delivery_date">
+        <DataField>request_delivery_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="request_request_no">
+        <DataField>request_request_no</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_is_quotation">
+        <DataField>request_is_quotation</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="request_completed_date">
+        <DataField>request_completed_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="request_real_cost_v_real_cost">
+        <DataField>request_real_cost_v_real_cost</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="request_real_price_v_real_price">
+        <DataField>request_real_price_v_real_price</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="request_count_docs_doc_count">
+        <DataField>request_count_docs_doc_count</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="global_analysis_oid">
+        <DataField>global_analysis_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="document_info_sum_units_v_global_analysis_unit">
+        <DataField>document_info_sum_units_v_global_analysis_unit</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="document_info_sum_units_v_global_analysis_unit_qty">
+        <DataField>document_info_sum_units_v_global_analysis_unit_qty</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="document_info_sum_units_v_global_analysis_unit_id">
+        <DataField>document_info_sum_units_v_global_analysis_unit_id</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="dmn_v_elmnt">
+        <DataField>dmn_v_elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="usr_name">
+        <DataField>usr_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

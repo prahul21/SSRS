@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="RequestStatus">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <CommandText>
+	  		SELECT 'Wird ausgeführt' AS label, 1 AS value, 'de' as language
+	  		union
+	  		SELECT 'En progrès' AS label, 1 AS value, 'fr' as language
+	  		union
+	  		SELECT 'En curso' AS label, 1 AS value, 'es' as language
+	  		union
+	  		SELECT 'In Progress' AS label, 1 AS value, 'en' as language
+			union
+			SELECT 'In Warteschleife' AS label, 2 AS value, 'de' as language
+			union
+			SELECT 'En attente' AS label, 2 AS value, 'fr' as language
+			union
+			SELECT 'En espera' AS label, 2 AS value, 'es' as language
+			union
+			SELECT 'On Hold' AS label, 2 AS value, 'en' as language 
+			union
+			SELECT 'Abgeschlossen' AS label, 3 AS value, 'de' as language
+			union
+			SELECT 'Completado' AS label, 3 AS value, 'es' as langauge
+			union
+			SELECT 'Complété' AS label, 3 AS value, 'fr' as language
+			union
+			SELECT 'Completed' AS label, 3 AS value, 'en' as language
+			union
+			SELECT 'Abgebrochen' AS label, 4 AS value, 'de' as language
+			union
+			SELECT 'Cancelado' AS label, 4 AS value, 'es' as langauge
+			union
+			SELECT 'Annulé' AS label, 4 AS value, 'fr' as language
+			union
+			SELECT 'Canceled' AS label, 4 AS value, 'en' as language
+	</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="label">
+        <DataField>label</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="value">
+        <DataField>value</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="language">
+        <DataField>language</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>      
+    </Fields>
+  </DataSet>
+</SharedDataSet>

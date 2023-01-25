@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="ProviderCustomer">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <CommandText>
+		select 'Customer' as label, 'Customer' as value, 'en' as language
+		union	
+		select 'Cliente' as label, 'Customer' as value, 'es' as language
+		union  
+		select 'Kunde' as label, 'Customer' as value, 'de' as language
+		union  
+		select 'Client' as label, 'Customer' as value, 'fr' as language
+		union	
+		select 'Provider' as label, 'Provider' as value, 'en' as language
+		union	
+		select 'Proveedor' as label, 'Provider' as value, 'es' as language
+		union  
+		select 'Anbieter' as label, 'Provider' as value, 'de' as language
+		union  
+		select 'Fournisseur' as label, 'Provider' as value, 'fr' as language						
+	</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="label">
+        <DataField>label</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="value">
+        <DataField>value</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="language">
+        <DataField>language</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>      
+    </Fields>
+  </DataSet>
+</SharedDataSet>

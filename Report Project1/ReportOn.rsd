@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="ReportOn">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <CommandText>
+		select 'Costs' as label, 'Costs' as value, 'en' as language
+		union	
+		select 'Costes' as label, 'Costs' as value, 'es' as language
+		union  
+		select 'Kosten' as label, 'Costs' as value, 'de' as language
+		union  
+		select 'Coûts' as label, 'Costs' as value, 'fr' as language
+		union	
+		select 'Prices' as label, 'Prices' as value, 'en' as language
+		union	
+		select 'Precios' as label, 'Prices' as value, 'es' as language
+		union  
+		select 'Preise' as label, 'Prices' as value, 'de' as language
+		union  
+		select 'Prix' as label, 'Prices' as value, 'fr' as language
+		union
+		select 'Profit / Loss' as label, 'Profit / Loss' as value, 'en' as language
+		union
+		select 'Pérdidas/Ganancias' as label, 'Profit / Loss' as value, 'es' as language
+		union
+		select 'Gewinn/Verlust' as label, 'Profit / Loss' as value, 'de' as language
+		union
+		select 'Profits/pertes' as label, 'Profit / Loss' as value, 'fr' as language		
+	</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="label">
+        <DataField>label</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="value">
+        <DataField>value</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="language">
+        <DataField>language</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>      
+    </Fields>
+  </DataSet>
+</SharedDataSet>

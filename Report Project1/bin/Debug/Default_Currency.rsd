@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <CommandText>SELECT      currency.oid
+FROM            list_default LEFT JOIN
+                         currency ON (currency.oid = SUBSTRING(list_default.value_id, CHARINDEX('-', list_default.value_id) + 1, 99))
+WHERE        list_default.list = 6 AND list_default.value_id IS NOT NULL
+UNION
+SELECT       1
+WHERE        NOT EXISTS
+                             (SELECT        1
+                               FROM            list_default
+                               WHERE        list_default.list = 6 AND list_default.value_id IS NOT NULL)
+</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="oid">
+        <DataField>oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

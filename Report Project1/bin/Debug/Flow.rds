@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Flow">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=qa48-2012r2;Initial Catalog=server3_flow</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>3f5dddac-7613-446c-91f6-8ac9d7cf800d</DataSourceID>
+</RptDataSource>

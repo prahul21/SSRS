@@ -1,0 +1,1346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+	<AutoRefresh>0</AutoRefresh>
+	<DataSources>
+		<DataSource Name="Flow">
+			<DataSourceReference>Flow</DataSourceReference>
+			<rd:SecurityType>None</rd:SecurityType>
+			<rd:DataSourceID>24e25b79-48da-4216-926b-c4d6869b5d0e</rd:DataSourceID>
+		</DataSource>
+	</DataSources>
+	<DataSets>
+		<DataSet Name="Currency">
+			<SharedDataSet>
+				<SharedDataSetReference>CurrencyDataSet</SharedDataSetReference>
+			</SharedDataSet>
+			<Fields>
+				<Field Name="label">
+					<DataField>label</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="value">
+					<DataField>value</DataField>
+					<rd:TypeName>System.Decimal</rd:TypeName>
+				</Field>
+			</Fields>
+			<Filters>
+				<Filter>
+					<FilterExpression>=Fields!label.Value</FilterExpression>
+					<Operator>NotEqual</Operator>
+					<FilterValues>
+						<FilterValue>All</FilterValue>
+					</FilterValues>
+				</Filter>
+			</Filters>
+		</DataSet>
+		<DataSet Name="Spend_Analysis">
+			<SharedDataSet>
+				<SharedDataSetReference>Country-level Spend Analysis</SharedDataSetReference>
+				<QueryParameters>
+					<QueryParameter Name="@Language">
+						<Value>=Parameters!Language.Value</Value>
+					</QueryParameter>
+					<QueryParameter Name="@P_Req_Rcpt_Date_From">
+						<Value>=Parameters!P_Req_Rcpt_Date_From.Value</Value>
+					</QueryParameter>
+					<QueryParameter Name="@P_Req_Rcpt_Date_To">
+						<Value>=Parameters!P_Req_Rcpt_Date_To.Value</Value>
+					</QueryParameter>
+					<QueryParameter Name="@P_Currency_Code">
+						<Value>=Parameters!P_Currency_Code.Value</Value>
+					</QueryParameter>
+					<QueryParameter Name="@P_Hidden_Customer_Numeric">
+						<Value>=Parameters!P_Hidden_Customer_Numeric.Value</Value>
+					</QueryParameter>
+					<QueryParameter Name="@P_Hidden_Provider_Numeric">
+						<Value>=Parameters!P_Hidden_Provider_Numeric.Value</Value>
+					</QueryParameter>
+				</QueryParameters>
+			</SharedDataSet>
+			<Fields>
+				<Field Name="request_financial_stats_price">
+					<DataField>request_financial_stats_price</DataField>
+					<rd:TypeName>System.Decimal</rd:TypeName>
+				</Field>
+				<Field Name="request_financial_stats_cost">
+					<DataField>request_financial_stats_cost</DataField>
+					<rd:TypeName>System.Decimal</rd:TypeName>
+				</Field>
+				<Field Name="contact_requested_by_business_unit_name">
+					<DataField>contact_requested_by_business_unit_name</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="contact_requested_by_business_unit_code">
+					<DataField>contact_requested_by_business_unit_code</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="project_name">
+					<DataField>project_name</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="language_source_short_name">
+					<DataField>language_source_short_name</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="customer_customer_number">
+					<DataField>customer_customer_number</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="contact_requested_by_country_elmnt">
+					<DataField>contact_requested_by_country_elmnt</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="customer_name">
+					<DataField>customer_name</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="request_request_no">
+					<DataField>request_request_no</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="currency_v_symbol">
+					<DataField>currency_v_symbol</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+			</Fields>
+		</DataSet>
+		<DataSet Name="Default_Currency">
+			<SharedDataSet>
+				<SharedDataSetReference>Default_Currency</SharedDataSetReference>
+			</SharedDataSet>
+			<Fields>
+				<Field Name="oid">
+					<DataField>oid</DataField>
+					<rd:TypeName>System.Decimal</rd:TypeName>
+				</Field>
+			</Fields>
+		</DataSet>
+		<DataSet Name="ReportStyle">
+			<SharedDataSet>
+				<SharedDataSetReference>ReportStyle</SharedDataSetReference>
+			</SharedDataSet>
+			<Fields>
+				<Field Name="id">
+					<DataField>id</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="StyleName">
+					<DataField>StyleName</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="TableHeaderForeColor">
+					<DataField>TableHeaderForeColor</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="TableHeaderBackColor">
+					<DataField>TableHeaderBackColor</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="TableSubHeaderForeColor">
+					<DataField>TableSubHeaderForeColor</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="ToogleRowBackColor1">
+					<DataField>ToogleRowBackColor1</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="ToogleRowBackColor2">
+					<DataField>ToogleRowBackColor2</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="TableSubHeaderBackColor">
+					<DataField>TableSubHeaderBackColor</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="Font">
+					<DataField>Font</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="FontSize">
+					<DataField>FontSize</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="FontColor">
+					<DataField>FontColor</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="BorderColor">
+					<DataField>BorderColor</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="BorderStyle">
+					<DataField>BorderStyle</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="BorderWidth">
+					<DataField>BorderWidth</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="BackGroundColor">
+					<DataField>BackGroundColor</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="PaletteColor1">
+					<DataField>PaletteColor1</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="Activestatus">
+					<DataField>Activestatus</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="PaletteColor2">
+					<DataField>PaletteColor2</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="PaletteColor3">
+					<DataField>PaletteColor3</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="PaletteColor4">
+					<DataField>PaletteColor4</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="PaletteColor5">
+					<DataField>PaletteColor5</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="ChartFontSize">
+					<DataField>ChartFontSize</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="HeaderForeColor">
+					<DataField>HeaderForeColor</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="HeaderBackColor">
+					<DataField>HeaderBackColor</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="HeaderFont">
+					<DataField>HeaderFont</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="HeaderFontSize">
+					<DataField>HeaderFontSize</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="FooterForeColor">
+					<DataField>FooterForeColor</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="FooterBackColor">
+					<DataField>FooterBackColor</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="FooterFont">
+					<DataField>FooterFont</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="FooterFontSize">
+					<DataField>FooterFontSize</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="FooterLogoIcon">
+					<DataField>FooterLogoIcon</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="LogoImage">
+					<DataField>LogoImage</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+			</Fields>
+		</DataSet>
+	</DataSets>
+	<ReportSections>
+		<ReportSection>
+			<Body>
+				<ReportItems>
+					<Chart Name="Price">
+						<ChartCategoryHierarchy>
+							<ChartMembers>
+								<ChartMember>
+									<Group Name="Price_CategoryGroup">
+										<GroupExpressions>
+											<GroupExpression>=Fields!project_name.Value</GroupExpression>
+										</GroupExpressions>
+									</Group>
+									<SortExpressions>
+										<SortExpression>
+											<Value>=Fields!project_name.Value</Value>
+										</SortExpression>
+									</SortExpressions>
+									<Label>=Fields!project_name.Value</Label>
+								</ChartMember>
+							</ChartMembers>
+						</ChartCategoryHierarchy>
+						<ChartSeriesHierarchy>
+							<ChartMembers>
+								<ChartMember>
+									<Label>request financial stats price</Label>
+								</ChartMember>
+							</ChartMembers>
+						</ChartSeriesHierarchy>
+						<ChartData>
+							<ChartSeriesCollection>
+								<ChartSeries Name="request_financial_stats_price">
+									<ChartDataPoints>
+										<ChartDataPoint>
+											<ChartDataPointValues>
+												<X>=Fields!project_name.Value</X>
+												<Y>=Sum(Fields!request_financial_stats_price.Value)</Y>
+											</ChartDataPointValues>
+											<ChartDataLabel>
+												<Style>
+													<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+												</Style>
+												<Label>=Code.FormatAmountAndCurrencySymbol(Format(Sum(Fields!request_financial_stats_price.Value), "#,0.00;(0.00)"), Fields!currency_v_symbol.Value)</Label>
+												<Visible>true</Visible>
+											</ChartDataLabel>
+											<ToolTip>=Code.FormatAmountAndCurrencySymbol(Format(Sum(Fields!request_financial_stats_price.Value), "#,0.00;(0.00)"), Fields!currency_v_symbol.Value)</ToolTip>
+											<Style />
+											<ChartMarker>
+												<Size>1pt</Size>
+												<Style />
+											</ChartMarker>
+											<DataElementOutput>Output</DataElementOutput>
+										</ChartDataPoint>
+									</ChartDataPoints>
+									<Style />
+									<ChartEmptyPoints>
+										<Style />
+										<ChartMarker>
+											<Style />
+										</ChartMarker>
+										<ChartDataLabel>
+											<Style>
+												<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+											</Style>
+										</ChartDataLabel>
+									</ChartEmptyPoints>
+									<ChartItemInLegend>
+										<LegendText>Price</LegendText>
+									</ChartItemInLegend>
+									<ValueAxisName>Primary</ValueAxisName>
+									<CategoryAxisName>Primary</CategoryAxisName>
+									<ChartSmartLabel>
+										<CalloutLineColor>Black</CalloutLineColor>
+										<MinMovingDistance>0pt</MinMovingDistance>
+									</ChartSmartLabel>
+								</ChartSeries>
+							</ChartSeriesCollection>
+						</ChartData>
+						<ChartAreas>
+							<ChartArea Name="Default">
+								<ChartCategoryAxes>
+									<ChartAxis Name="Primary">
+										<Style>
+											<Border>
+												<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												<Style>None</Style>
+											</Border>
+											<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+											<FontSize>=First(Fields!ChartFontSize.Value, "ReportStyle")</FontSize>
+											<TextDecoration>None</TextDecoration>
+											<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+										</Style>
+										<ChartAxisTitle>
+											<Caption />
+											<Style>
+												<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+												<FontSize>=First(Fields!ChartFontSize.Value, "ReportStyle")</FontSize>
+												<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+											</Style>
+										</ChartAxisTitle>
+										<ChartMajorGridLines>
+											<Enabled>False</Enabled>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												</Border>
+											</Style>
+										</ChartMajorGridLines>
+										<ChartMinorGridLines>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+													<Style>Dotted</Style>
+												</Border>
+											</Style>
+										</ChartMinorGridLines>
+										<ChartMajorTickMarks>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+													<Style>None</Style>
+												</Border>
+											</Style>
+										</ChartMajorTickMarks>
+										<ChartMinorTickMarks>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												</Border>
+											</Style>
+											<Length>0.5</Length>
+										</ChartMinorTickMarks>
+										<CrossAt>NaN</CrossAt>
+										<Minimum>NaN</Minimum>
+										<Maximum>NaN</Maximum>
+										<Angle>-45</Angle>
+										<AllowLabelRotation>Rotate45</AllowLabelRotation>
+										<LabelsAutoFitDisabled>true</LabelsAutoFitDisabled>
+										<ChartAxisScaleBreak>
+											<Style />
+										</ChartAxisScaleBreak>
+									</ChartAxis>
+									<ChartAxis Name="Secondary">
+										<Style>
+											<Border>
+												<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												<Style>None</Style>
+											</Border>
+											<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+											<FontSize>=First(Fields!ChartFontSize.Value, "ReportStyle")</FontSize>
+											<TextDecoration>None</TextDecoration>
+											<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+										</Style>
+										<ChartAxisTitle>
+											<Caption />
+											<Style>
+												<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+												<FontSize>=First(Fields!ChartFontSize.Value, "ReportStyle")</FontSize>
+												<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+											</Style>
+										</ChartAxisTitle>
+										<Interval>1</Interval>
+										<ChartMajorGridLines>
+											<Enabled>False</Enabled>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												</Border>
+											</Style>
+										</ChartMajorGridLines>
+										<ChartMinorGridLines>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+													<Style>Dotted</Style>
+												</Border>
+											</Style>
+										</ChartMinorGridLines>
+										<ChartMajorTickMarks>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+													<Style>None</Style>
+												</Border>
+											</Style>
+										</ChartMajorTickMarks>
+										<ChartMinorTickMarks>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												</Border>
+											</Style>
+											<Length>0.5</Length>
+										</ChartMinorTickMarks>
+										<CrossAt>NaN</CrossAt>
+										<Location>Opposite</Location>
+										<Minimum>NaN</Minimum>
+										<Maximum>NaN</Maximum>
+										<Angle>90</Angle>
+										<LabelsAutoFitDisabled>true</LabelsAutoFitDisabled>
+										<ChartAxisScaleBreak>
+											<Style />
+										</ChartAxisScaleBreak>
+									</ChartAxis>
+								</ChartCategoryAxes>
+								<ChartValueAxes>
+									<ChartAxis Name="Primary">
+										<Style>
+											<Border>
+												<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												<Style>None</Style>
+											</Border>
+											<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+											<FontSize>=First(Fields!ChartFontSize.Value, "ReportStyle")</FontSize>
+											<Format>=Code.FormatAmountAndCurrencySymbolString(Fields!currency_v_symbol.Value)</Format>
+											<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+										</Style>
+										<ChartAxisTitle>
+											<Caption />
+											<Style>
+												<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+												<FontSize>=First(Fields!ChartFontSize.Value, "ReportStyle")</FontSize>
+												<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+											</Style>
+										</ChartAxisTitle>
+										<ChartMajorGridLines>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												</Border>
+											</Style>
+										</ChartMajorGridLines>
+										<ChartMinorGridLines>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+													<Style>Dotted</Style>
+												</Border>
+											</Style>
+										</ChartMinorGridLines>
+										<ChartMajorTickMarks>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+													<Style>None</Style>
+												</Border>
+											</Style>
+										</ChartMajorTickMarks>
+										<ChartMinorTickMarks>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												</Border>
+											</Style>
+											<Length>0.5</Length>
+										</ChartMinorTickMarks>
+										<CrossAt>NaN</CrossAt>
+										<Minimum>NaN</Minimum>
+										<Maximum>NaN</Maximum>
+										<ChartAxisScaleBreak>
+											<Style />
+										</ChartAxisScaleBreak>
+									</ChartAxis>
+									<ChartAxis Name="Secondary">
+										<Style>
+											<Border>
+												<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												<Style>None</Style>
+											</Border>
+											<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+											<FontSize>=First(Fields!ChartFontSize.Value, "ReportStyle")</FontSize>
+											<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+										</Style>
+										<ChartAxisTitle>
+											<Caption />
+											<Style>
+												<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+												<FontSize>=First(Fields!ChartFontSize.Value, "ReportStyle")</FontSize>
+												<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+											</Style>
+										</ChartAxisTitle>
+										<ChartMajorGridLines>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												</Border>
+											</Style>
+										</ChartMajorGridLines>
+										<ChartMinorGridLines>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+													<Style>Dotted</Style>
+												</Border>
+											</Style>
+										</ChartMinorGridLines>
+										<ChartMajorTickMarks>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+													<Style>None</Style>
+												</Border>
+											</Style>
+										</ChartMajorTickMarks>
+										<ChartMinorTickMarks>
+											<Style>
+												<Border>
+													<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+												</Border>
+											</Style>
+											<Length>0.5</Length>
+										</ChartMinorTickMarks>
+										<CrossAt>NaN</CrossAt>
+										<Location>Opposite</Location>
+										<Minimum>NaN</Minimum>
+										<Maximum>NaN</Maximum>
+										<ChartAxisScaleBreak>
+											<Style />
+										</ChartAxisScaleBreak>
+									</ChartAxis>
+								</ChartValueAxes>
+								<Style>
+									<BackgroundColor>#00ffffff</BackgroundColor>
+									<BackgroundGradientType>None</BackgroundGradientType>
+								</Style>
+							</ChartArea>
+						</ChartAreas>
+						<ChartLegends>
+							<ChartLegend Name="Price">
+								<Style>
+									<BackgroundGradientType>None</BackgroundGradientType>
+									<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+									<FontSize>=First(Fields!ChartFontSize.Value, "ReportStyle")</FontSize>
+									<ShadowOffset>0pt</ShadowOffset>
+								</Style>
+								<Position>RightCenter</Position>
+								<Layout>TallTable</Layout>
+								<ChartLegendTitle>
+									<Caption />
+									<Style>
+										<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+										<FontSize>=First(Fields!ChartFontSize.Value, "ReportStyle")</FontSize>
+										<FontWeight>Bold</FontWeight>
+										<TextAlign>Center</TextAlign>
+									</Style>
+								</ChartLegendTitle>
+								<HeaderSeparatorColor>Black</HeaderSeparatorColor>
+								<ColumnSeparatorColor>Black</ColumnSeparatorColor>
+							</ChartLegend>
+						</ChartLegends>
+						<ChartTitles>
+							<ChartTitle Name="Default">
+								<Caption>Project Group-level Spend Analysis</Caption>
+								<Style>
+									<BackgroundGradientType>None</BackgroundGradientType>
+									<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+									<FontSize>=First(Fields!ChartFontSize.Value, "ReportStyle")</FontSize>
+									<FontWeight>Normal</FontWeight>
+									<TextAlign>Left</TextAlign>
+									<VerticalAlign>Top</VerticalAlign>
+									<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+								</Style>
+								<Position>TopLeft</Position>
+							</ChartTitle>
+						</ChartTitles>
+						<Palette>Custom</Palette>
+						<ChartCustomPaletteColors>
+							<ChartCustomPaletteColor>=First(Fields!PaletteColor1.Value, "ReportStyle")</ChartCustomPaletteColor>
+							<ChartCustomPaletteColor>=First(Fields!PaletteColor2.Value, "ReportStyle")</ChartCustomPaletteColor>
+							<ChartCustomPaletteColor>=First(Fields!PaletteColor3.Value, "ReportStyle")</ChartCustomPaletteColor>
+							<ChartCustomPaletteColor>=First(Fields!PaletteColor4.Value, "ReportStyle")</ChartCustomPaletteColor>
+							<ChartCustomPaletteColor>=First(Fields!PaletteColor5.Value, "ReportStyle")</ChartCustomPaletteColor>
+						</ChartCustomPaletteColors>
+						<ChartBorderSkin>
+							<Style>
+								<BackgroundColor>Gray</BackgroundColor>
+								<BackgroundGradientType>None</BackgroundGradientType>
+								<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+							</Style>
+						</ChartBorderSkin>
+						<ChartNoDataMessage Name="NoDataMessage">
+							<Caption>No Data Available</Caption>
+							<Style>
+								<BackgroundGradientType>None</BackgroundGradientType>
+								<FontWeight>Bold</FontWeight>
+								<TextAlign>General</TextAlign>
+								<VerticalAlign>Top</VerticalAlign>
+							</Style>
+						</ChartNoDataMessage>
+						<DataSetName>Spend_Analysis</DataSetName>
+						<Top>2.1cm</Top>
+						<Left>0.10002cm</Left>
+						<Height>13.7cm</Height>
+						<Width>27.5cm</Width>
+						<Style>
+							<Border>
+								<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+								<Style>None</Style>
+							</Border>
+							<BackgroundColor>White</BackgroundColor>
+							<BackgroundGradientType>None</BackgroundGradientType>
+						</Style>
+					</Chart>
+					<Tablix Name="Tablix10">
+						<TablixBody>
+							<TablixColumns>
+								<TablixColumn>
+									<Width>7cm</Width>
+								</TablixColumn>
+								<TablixColumn>
+									<Width>7cm</Width>
+								</TablixColumn>
+								<TablixColumn>
+									<Width>6.5cm</Width>
+								</TablixColumn>
+							</TablixColumns>
+							<TablixRows>
+								<TablixRow>
+									<Height>0.7cm</Height>
+									<TablixCells>
+										<TablixCell>
+											<CellContents>
+												<Textbox Name="Textbox107">
+													<CanGrow>true</CanGrow>
+													<KeepTogether>true</KeepTogether>
+													<Paragraphs>
+														<Paragraph>
+															<TextRuns>
+																<TextRun>
+																	<Value>Project NO</Value>
+																	<Style>
+																		<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+																		<FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+																		<Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+																	</Style>
+																</TextRun>
+															</TextRuns>
+															<Style />
+														</Paragraph>
+													</Paragraphs>
+													<rd:DefaultName>Textbox107</rd:DefaultName>
+													<Style>
+														<Border>
+															<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+															<Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+															<Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+														</Border>
+														<BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+														<PaddingLeft>2pt</PaddingLeft>
+														<PaddingRight>2pt</PaddingRight>
+														<PaddingTop>2pt</PaddingTop>
+														<PaddingBottom>2pt</PaddingBottom>
+													</Style>
+												</Textbox>
+											</CellContents>
+										</TablixCell>
+										<TablixCell>
+											<CellContents>
+												<Textbox Name="Textbox109">
+													<CanGrow>true</CanGrow>
+													<KeepTogether>true</KeepTogether>
+													<Paragraphs>
+														<Paragraph>
+															<TextRuns>
+																<TextRun>
+																	<Value>Customer Name</Value>
+																	<Style>
+																		<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+																		<FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+																		<Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+																	</Style>
+																</TextRun>
+															</TextRuns>
+															<Style />
+														</Paragraph>
+													</Paragraphs>
+													<rd:DefaultName>Textbox109</rd:DefaultName>
+													<Style>
+														<Border>
+															<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+															<Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+															<Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+														</Border>
+														<BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+														<PaddingLeft>2pt</PaddingLeft>
+														<PaddingRight>2pt</PaddingRight>
+														<PaddingTop>2pt</PaddingTop>
+														<PaddingBottom>2pt</PaddingBottom>
+													</Style>
+												</Textbox>
+											</CellContents>
+										</TablixCell>
+										<TablixCell>
+											<CellContents>
+												<Textbox Name="Textbox113">
+													<CanGrow>true</CanGrow>
+													<KeepTogether>true</KeepTogether>
+													<Paragraphs>
+														<Paragraph>
+															<TextRuns>
+																<TextRun>
+																	<Value>Price</Value>
+																	<Style>
+																		<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+																		<FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+																		<Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+																	</Style>
+																</TextRun>
+															</TextRuns>
+															<Style />
+														</Paragraph>
+													</Paragraphs>
+													<rd:DefaultName>Textbox113</rd:DefaultName>
+													<Style>
+														<Border>
+															<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+															<Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+															<Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+														</Border>
+														<BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+														<PaddingLeft>2pt</PaddingLeft>
+														<PaddingRight>2pt</PaddingRight>
+														<PaddingTop>2pt</PaddingTop>
+														<PaddingBottom>2pt</PaddingBottom>
+													</Style>
+												</Textbox>
+											</CellContents>
+										</TablixCell>
+									</TablixCells>
+								</TablixRow>
+								<TablixRow>
+									<Height>0.7cm</Height>
+									<TablixCells>
+										<TablixCell>
+											<CellContents>
+												<Textbox Name="Textbox73">
+													<CanGrow>true</CanGrow>
+													<KeepTogether>true</KeepTogether>
+													<Paragraphs>
+														<Paragraph>
+															<TextRuns>
+																<TextRun>
+																	<Value>=Code.FormatAmountAndCurrencySymbol(Format(Sum(Fields!request_financial_stats_price.Value), "#,0.00;(0.00)"), Fields!currency_v_symbol.Value)</Value>
+																	<Style>
+																		<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+																		<FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+																		<Color>=First(Fields!TableSubHeaderForeColor.Value, "ReportStyle")</Color>
+																	</Style>
+																</TextRun>
+															</TextRuns>
+															<Style>
+																<TextAlign>Right</TextAlign>
+															</Style>
+														</Paragraph>
+													</Paragraphs>
+													<rd:DefaultName>Textbox73</rd:DefaultName>
+													<Style>
+														<Border>
+															<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+															<Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+															<Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+														</Border>
+														<BackgroundColor>=First(Fields!TableSubHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+														<PaddingLeft>2pt</PaddingLeft>
+														<PaddingRight>2pt</PaddingRight>
+														<PaddingTop>2pt</PaddingTop>
+														<PaddingBottom>2pt</PaddingBottom>
+													</Style>
+												</Textbox>
+												<ColSpan>3</ColSpan>
+											</CellContents>
+										</TablixCell>
+										<TablixCell />
+										<TablixCell />
+									</TablixCells>
+								</TablixRow>
+								<TablixRow>
+									<Height>0.7cm</Height>
+									<TablixCells>
+										<TablixCell>
+											<CellContents>
+												<Textbox Name="request_request_no1">
+													<CanGrow>true</CanGrow>
+													<KeepTogether>true</KeepTogether>
+													<Paragraphs>
+														<Paragraph>
+															<TextRuns>
+																<TextRun>
+																	<Value>=Fields!request_request_no.Value</Value>
+																	<Style>
+																		<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+																		<FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+																		<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+																	</Style>
+																</TextRun>
+															</TextRuns>
+															<Style />
+														</Paragraph>
+													</Paragraphs>
+													<rd:DefaultName>request_request_no1</rd:DefaultName>
+													<Style>
+														<Border>
+															<Color>=IIF(RUNNINGVALUE (Fields!project_name.Value+Fields!request_request_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+															<Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+															<Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+														</Border>
+														<BackgroundColor>=IIF(RUNNINGVALUE (Fields!project_name.Value+Fields!request_request_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+														<PaddingLeft>2pt</PaddingLeft>
+														<PaddingRight>2pt</PaddingRight>
+														<PaddingTop>2pt</PaddingTop>
+														<PaddingBottom>2pt</PaddingBottom>
+													</Style>
+												</Textbox>
+											</CellContents>
+										</TablixCell>
+										<TablixCell>
+											<CellContents>
+												<Textbox Name="customer_name">
+													<CanGrow>true</CanGrow>
+													<KeepTogether>true</KeepTogether>
+													<Paragraphs>
+														<Paragraph>
+															<TextRuns>
+																<TextRun>
+																	<Value>=Fields!customer_name.Value</Value>
+																	<Style>
+																		<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+																		<FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+																		<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+																	</Style>
+																</TextRun>
+															</TextRuns>
+															<Style />
+														</Paragraph>
+													</Paragraphs>
+													<rd:DefaultName>customer_name</rd:DefaultName>
+													<Style>
+														<Border>
+															<Color>=IIF(RUNNINGVALUE (Fields!project_name.Value+Fields!request_request_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+															<Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+															<Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+														</Border>
+														<BackgroundColor>=IIF(RUNNINGVALUE (Fields!project_name.Value+Fields!request_request_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+														<PaddingLeft>2pt</PaddingLeft>
+														<PaddingRight>2pt</PaddingRight>
+														<PaddingTop>2pt</PaddingTop>
+														<PaddingBottom>2pt</PaddingBottom>
+													</Style>
+												</Textbox>
+											</CellContents>
+										</TablixCell>
+										<TablixCell>
+											<CellContents>
+												<Textbox Name="request_financial_stats_price">
+													<CanGrow>true</CanGrow>
+													<KeepTogether>true</KeepTogether>
+													<Paragraphs>
+														<Paragraph>
+															<TextRuns>
+																<TextRun>
+																	<Value>=Code.FormatAmountAndCurrencySymbol(Format(Fields!request_financial_stats_price.Value, "#,0.00;(0.00)"), Fields!currency_v_symbol.Value)</Value>
+																	<Style>
+																		<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+																		<FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+																		<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+																	</Style>
+																</TextRun>
+															</TextRuns>
+															<Style />
+														</Paragraph>
+													</Paragraphs>
+													<rd:DefaultName>request_financial_stats_price</rd:DefaultName>
+													<Style>
+														<Border>
+															<Color>=IIF(RUNNINGVALUE (Fields!project_name.Value+Fields!request_request_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+															<Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+															<Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+														</Border>
+														<BackgroundColor>=IIF(RUNNINGVALUE (Fields!project_name.Value+Fields!request_request_no.Value,CountDistinct,Nothing) Mod 2,  First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+														<PaddingLeft>2pt</PaddingLeft>
+														<PaddingRight>2pt</PaddingRight>
+														<PaddingTop>2pt</PaddingTop>
+														<PaddingBottom>2pt</PaddingBottom>
+													</Style>
+												</Textbox>
+											</CellContents>
+										</TablixCell>
+									</TablixCells>
+								</TablixRow>
+							</TablixRows>
+						</TablixBody>
+						<TablixColumnHierarchy>
+							<TablixMembers>
+								<TablixMember />
+								<TablixMember />
+								<TablixMember />
+							</TablixMembers>
+						</TablixColumnHierarchy>
+						<TablixRowHierarchy>
+							<TablixMembers>
+								<TablixMember>
+									<TablixHeader>
+										<Size>7cm</Size>
+										<CellContents>
+											<Textbox Name="Textbox117">
+												<CanGrow>true</CanGrow>
+												<KeepTogether>true</KeepTogether>
+												<Paragraphs>
+													<Paragraph>
+														<TextRuns>
+															<TextRun>
+																<Value>Name</Value>
+																<Style>
+																	<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+																	<FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+																	<Color>=First(Fields!TableHeaderForeColor.Value, "ReportStyle")</Color>
+																</Style>
+															</TextRun>
+														</TextRuns>
+														<Style />
+													</Paragraph>
+												</Paragraphs>
+												<rd:DefaultName>Textbox117</rd:DefaultName>
+												<Style>
+													<Border>
+														<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+														<Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+														<Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+													</Border>
+													<BackgroundColor>=First(Fields!TableHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+													<PaddingLeft>2pt</PaddingLeft>
+													<PaddingRight>2pt</PaddingRight>
+													<PaddingTop>2pt</PaddingTop>
+													<PaddingBottom>2pt</PaddingBottom>
+												</Style>
+											</Textbox>
+										</CellContents>
+									</TablixHeader>
+									<TablixMembers>
+										<TablixMember>
+											<RepeatOnNewPage>true</RepeatOnNewPage>
+										</TablixMember>
+									</TablixMembers>
+									<RepeatOnNewPage>true</RepeatOnNewPage>
+								</TablixMember>
+								<TablixMember>
+									<Group Name="project_name">
+										<GroupExpressions>
+											<GroupExpression>=Fields!project_name.Value</GroupExpression>
+										</GroupExpressions>
+									</Group>
+									<SortExpressions>
+										<SortExpression>
+											<Value>=Fields!project_name.Value</Value>
+										</SortExpression>
+									</SortExpressions>
+									<TablixMembers>
+										<TablixMember>
+											<TablixHeader>
+												<Size>7cm</Size>
+												<CellContents>
+													<Textbox Name="project_name">
+														<CanGrow>true</CanGrow>
+														<KeepTogether>true</KeepTogether>
+														<Paragraphs>
+															<Paragraph>
+																<TextRuns>
+																	<TextRun>
+																		<Value>=Fields!project_name.Value</Value>
+																		<Style>
+																			<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+																			<FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+																			<Color>=First(Fields!TableSubHeaderForeColor.Value, "ReportStyle")</Color>
+																		</Style>
+																	</TextRun>
+																</TextRuns>
+																<Style />
+															</Paragraph>
+														</Paragraphs>
+														<rd:DefaultName>project_name</rd:DefaultName>
+														<Style>
+															<Border>
+																<Color>=First(Fields!BorderColor.Value, "ReportStyle")</Color>
+																<Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+																<Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+															</Border>
+															<BackgroundColor>=First(Fields!TableSubHeaderBackColor.Value, "ReportStyle")</BackgroundColor>
+															<PaddingLeft>2pt</PaddingLeft>
+															<PaddingRight>2pt</PaddingRight>
+															<PaddingTop>2pt</PaddingTop>
+															<PaddingBottom>2pt</PaddingBottom>
+														</Style>
+													</Textbox>
+												</CellContents>
+											</TablixHeader>
+										</TablixMember>
+										<TablixMember>
+											<TablixHeader>
+												<Size>7cm</Size>
+												<CellContents>
+													<Textbox Name="Textbox77">
+														<CanGrow>true</CanGrow>
+														<KeepTogether>true</KeepTogether>
+														<Paragraphs>
+															<Paragraph>
+																<TextRuns>
+																	<TextRun>
+																		<Value />
+																		<Style>
+																			<FontFamily>=First(Fields!Font.Value, "ReportStyle")</FontFamily>
+																			<FontSize>=First(Fields!FontSize.Value, "ReportStyle")</FontSize>
+																			<Color>=First(Fields!FontColor.Value, "ReportStyle")</Color>
+																		</Style>
+																	</TextRun>
+																</TextRuns>
+																<Style />
+															</Paragraph>
+														</Paragraphs>
+														<rd:DefaultName>Textbox77</rd:DefaultName>
+														<Style>
+															<Border>
+																<Color>=IIf((rownumber("Spend_Analysis") mod 2)= 1 ,First(Fields!ToogleRowBackColor2.Value, "ReportStyle"),First(Fields!ToogleRowBackColor1.Value, "ReportStyle"))</Color>
+																<Style>=First(Fields!BorderStyle.Value, "ReportStyle")</Style>
+																<Width>=First(Fields!BorderWidth.Value, "ReportStyle")</Width>
+															</Border>
+															<BackgroundColor>=IIf((rownumber("Spend_Analysis") mod 2) = 1,First(Fields!ToogleRowBackColor1.Value, "ReportStyle"),First(Fields!ToogleRowBackColor2.Value, "ReportStyle"))</BackgroundColor>
+															<PaddingLeft>2pt</PaddingLeft>
+															<PaddingRight>2pt</PaddingRight>
+															<PaddingTop>2pt</PaddingTop>
+															<PaddingBottom>2pt</PaddingBottom>
+														</Style>
+													</Textbox>
+												</CellContents>
+											</TablixHeader>
+											<TablixMembers>
+												<TablixMember>
+													<Group Name="request_request_no">
+														<GroupExpressions>
+															<GroupExpression>=Fields!request_request_no.Value</GroupExpression>
+														</GroupExpressions>
+													</Group>
+													<SortExpressions>
+														<SortExpression>
+															<Value>=Fields!request_request_no.Value</Value>
+														</SortExpression>
+													</SortExpressions>
+													<TablixMembers>
+														<TablixMember />
+													</TablixMembers>
+												</TablixMember>
+											</TablixMembers>
+										</TablixMember>
+									</TablixMembers>
+								</TablixMember>
+							</TablixMembers>
+						</TablixRowHierarchy>
+						<RepeatColumnHeaders>true</RepeatColumnHeaders>
+						<RepeatRowHeaders>true</RepeatRowHeaders>
+						<FixedColumnHeaders>true</FixedColumnHeaders>
+						<FixedRowHeaders>true</FixedRowHeaders>
+						<DataSetName>Spend_Analysis</DataSetName>
+						<Top>15.9cm</Top>
+						<Left>0.1cm</Left>
+						<Height>2.1cm</Height>
+						<Width>27.5cm</Width>
+						<ZIndex>1</ZIndex>
+						<Style>
+							<Border>
+								<Style>None</Style>
+							</Border>
+						</Style>
+					</Tablix>
+					<Subreport Name="Header">
+						<ReportName>Header</ReportName>
+						<Parameters>
+							<Parameter Name="HeaderForeColor">
+								<Value>=First(Fields!HeaderForeColor.Value, "ReportStyle")</Value>
+							</Parameter>
+							<Parameter Name="HeaderBackColor">
+								<Value>=First(Fields!HeaderBackColor.Value, "ReportStyle")</Value>
+							</Parameter>
+							<Parameter Name="HeaderFont">
+								<Value>=First(Fields!HeaderFont.Value, "ReportStyle")</Value>
+							</Parameter>
+							<Parameter Name="HeaderFontSize">
+								<Value>=First(Fields!HeaderFontSize.Value, "ReportStyle")</Value>
+							</Parameter>
+							<Parameter Name="LogoImage">
+								<Value>=First(Fields!LogoImage.Value, "ReportStyle")</Value>
+							</Parameter>
+							<Parameter Name="ReportName">
+								<Value>=Globals!ReportName</Value>
+							</Parameter>
+						</Parameters>
+						<Height>2cm</Height>
+						<Width>27.7cm</Width>
+						<ZIndex>2</ZIndex>
+						<Style>
+							<Border>
+								<Style>None</Style>
+							</Border>
+							<FontFamily />
+						</Style>
+					</Subreport>
+					<Subreport Name="Footer">
+						<ReportName>Footer</ReportName>
+						<Parameters>
+							<Parameter Name="ExecutionTime">
+								<Value>=Globals!ExecutionTime</Value>
+							</Parameter>
+							<Parameter Name="FooterForeColor">
+								<Value>=First(Fields!FooterForeColor.Value, "ReportStyle")</Value>
+							</Parameter>
+							<Parameter Name="FooterBackColor">
+								<Value>=First(Fields!FooterBackColor.Value, "ReportStyle")</Value>
+							</Parameter>
+							<Parameter Name="FooterFont">
+								<Value>=First(Fields!FooterFont.Value, "ReportStyle")</Value>
+							</Parameter>
+							<Parameter Name="FooterFontSize">
+								<Value>=First(Fields!FooterFontSize.Value, "ReportStyle")</Value>
+							</Parameter>
+							<Parameter Name="FooterLogoIcon">
+								<Value>=First(Fields!FooterLogoIcon.Value, "ReportStyle")</Value>
+							</Parameter>
+						</Parameters>
+						<Top>18cm</Top>
+						<Height>1cm</Height>
+						<Width>27.7cm</Width>
+						<ZIndex>3</ZIndex>
+						<Style>
+							<Border>
+								<Style>None</Style>
+							</Border>
+							<FontFamily />
+						</Style>
+					</Subreport>
+				</ReportItems>
+				<Height>19cm</Height>
+				<Style />
+			</Body>
+			<Width>27.7cm</Width>
+			<Page>
+				<PageHeight>21cm</PageHeight>
+				<PageWidth>29.7cm</PageWidth>
+				<LeftMargin>1cm</LeftMargin>
+				<RightMargin>1cm</RightMargin>
+				<TopMargin>1cm</TopMargin>
+				<BottomMargin>1cm</BottomMargin>
+				<ColumnSpacing>1.27cm</ColumnSpacing>
+				<Style />
+			</Page>
+		</ReportSection>
+	</ReportSections>
+	<ReportParameters>
+		<ReportParameter Name="Language">
+			<DataType>String</DataType>
+			<Nullable>true</Nullable>
+			<DefaultValue>
+				<Values>
+					<Value>en</Value>
+				</Values>
+			</DefaultValue>
+			<Prompt>Language</Prompt>
+			<Hidden>true</Hidden>
+		</ReportParameter>
+		<ReportParameter Name="P_Currency_Code">
+			<DataType>Integer</DataType>
+			<Nullable>true</Nullable>
+			<Prompt>Currency:</Prompt>
+			<ValidValues>
+				<DataSetReference>
+					<DataSetName>Currency</DataSetName>
+					<ValueField>value</ValueField>
+					<LabelField>label</LabelField>
+				</DataSetReference>
+			</ValidValues>
+		</ReportParameter>
+		<ReportParameter Name="P_Req_Rcpt_Date_From">
+			<DataType>DateTime</DataType>
+			<Nullable>true</Nullable>
+			<Prompt>Project Reception Date From:</Prompt>
+		</ReportParameter>
+		<ReportParameter Name="P_Req_Rcpt_Date_To">
+			<DataType>DateTime</DataType>
+			<Nullable>true</Nullable>
+			<Prompt>Project Reception Date To:</Prompt>
+		</ReportParameter>
+		<ReportParameter Name="P_Hidden_Customer_Numeric">
+			<DataType>Integer</DataType>
+			<Nullable>true</Nullable>
+			<Prompt>P Hidden Customer Numeric</Prompt>
+			<Hidden>true</Hidden>
+		</ReportParameter>
+		<ReportParameter Name="P_Hidden_Provider_Numeric">
+			<DataType>String</DataType>
+			<Nullable>true</Nullable>
+			<Prompt>P_Hidden_Provider_Numeric</Prompt>
+			<Hidden>true</Hidden>
+		</ReportParameter>
+	</ReportParameters>
+	<ReportParametersLayout>
+		<GridLayoutDefinition>
+			<NumberOfColumns>3</NumberOfColumns>
+			<NumberOfRows>3</NumberOfRows>
+			<CellDefinitions>
+				<CellDefinition>
+					<ColumnIndex>0</ColumnIndex>
+					<RowIndex>0</RowIndex>
+					<ParameterName>Language</ParameterName>
+				</CellDefinition>
+				<CellDefinition>
+					<ColumnIndex>0</ColumnIndex>
+					<RowIndex>1</RowIndex>
+					<ParameterName>P_Currency_Code</ParameterName>
+				</CellDefinition>
+				<CellDefinition>
+					<ColumnIndex>1</ColumnIndex>
+					<RowIndex>1</RowIndex>
+					<ParameterName>P_Req_Rcpt_Date_From</ParameterName>
+				</CellDefinition>
+				<CellDefinition>
+					<ColumnIndex>0</ColumnIndex>
+					<RowIndex>2</RowIndex>
+					<ParameterName>P_Req_Rcpt_Date_To</ParameterName>
+				</CellDefinition>
+				<CellDefinition>
+					<ColumnIndex>1</ColumnIndex>
+					<RowIndex>2</RowIndex>
+					<ParameterName>P_Hidden_Customer_Numeric</ParameterName>
+				</CellDefinition>
+				<CellDefinition>
+					<ColumnIndex>2</ColumnIndex>
+					<RowIndex>2</RowIndex>
+					<ParameterName>P_Hidden_Provider_Numeric</ParameterName>
+				</CellDefinition>
+			</CellDefinitions>
+		</GridLayoutDefinition>
+	</ReportParametersLayout>
+	<Language>en-US</Language>
+	<ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+	<rd:ReportUnitType>Cm</rd:ReportUnitType>
+	<rd:ReportID>d97a5fcf-421d-4d41-9093-1ac69873cc20</rd:ReportID>
+	<Code>
+	
+	Public Function FormatAmountAndCurrencySymbolString(currencySymbol As String) As String
+			
+		Dim langCode as String
+		langCode = UCase(UserLanguageCode())
+		
+		Dim englishLangCode as String
+		englishLangCode = "EN"
+		
+		Dim result as String
+		If (englishLangCode = langCode) Then
+			result = "'" &amp; currencySymbol &amp; "'#,0.00" &amp; ";('" &amp; currencySymbol &amp; "'0.00)"
+		Else
+			result = "#,0.00 " &amp; "'" &amp; currencySymbol &amp; "';(0.00 " &amp; "'" &amp; currencySymbol &amp; "')"
+		End If
+		
+		Return result
+	End Function
+				
+	Public Function FormatAmountAndCurrencySymbol(amount as Double, currencySymbol As String) As String
+			
+		Dim langCode as String
+		langCode = UCase(UserLanguageCode())
+		
+		Dim formattedAmount = Format(amount,"#,0.00;(#,0.00)") 
+		
+		Dim englishLangCode as String
+		englishLangCode = "EN"
+		
+		Dim result as String
+		If (englishLangCode = langCode) Then
+			result = currencySymbol &amp; formattedAmount
+		Else
+			result = formattedAmount &amp; " " &amp; currencySymbol
+		End If
+		
+		Return result
+	End Function
+		
+	Public Function Key(label As String) As String
+		Return UCase(UserLanguageCode()) &amp; "__" &amp; label
+	End Function
+	
+	Public Function UserLanguageCode() As String
+		Return Report.User.Language.Substring(0,2)
+	End Function
+	 
+	</Code>
+</Report>

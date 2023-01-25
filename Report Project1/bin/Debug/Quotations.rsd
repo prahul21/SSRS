@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@P_Quotation_Sent">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Approved_Status">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Quotation_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Quotation_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@Language">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Provider_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Customer_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT DISTINCT invoice_purchase_orders_v.purchase_orders, contact.first_name, contact.last_name, currency.symbol, customer.name, invoice.facture_no, invoice.sub_total_before_tax, invoice.invoice_date, quotation.creation_date
+FROM   invoice LEFT OUTER JOIN
+             currency ON invoice.currency_id = currency.oid LEFT OUTER JOIN
+             invoice_purchase_orders_v ON invoice.oid = invoice_purchase_orders_v.invoice_id FULL OUTER JOIN
+             quotation ON quotation.quotation_invoice_id = invoice.oid LEFT OUTER JOIN
+             contact ON invoice.bill_to_contact_id = contact.oid LEFT OUTER JOIN
+             customer ON invoice.customer_id = customer.oid
+WHERE (quotation.quotation_invoice_id IS NOT NULL) AND (quotation.creation_date IS NOT NULL) AND (@P_Quotation_Sent IS NULL OR
+             @P_Quotation_Sent = 'All' OR
+             @P_Quotation_Sent = 'Sent' AND quotation.sent = 1 OR
+             @P_Quotation_Sent = 'Not Sent' AND quotation.sent = 0) AND (@P_Approved_Status IS NULL OR
+             @P_Approved_Status = 'All' OR
+             @P_Approved_Status = 'Approved' AND quotation.status = 1 OR
+             @P_Approved_Status = 'Not Approved' AND quotation.status &lt;&gt; 1) AND (@P_Quotation_Date_From IS NULL OR
+             quotation.creation_date &gt;= @P_Quotation_Date_From) AND (@P_Quotation_Date_To IS NULL OR
+             quotation.creation_date &lt;= @P_Quotation_Date_To) AND (@P_Hidden_Provider_Numeric IS NULL OR
+             @P_Hidden_Provider_Numeric = 0 OR
+             @P_Hidden_Provider_Numeric IN (SELECT task.provider_id FROM request JOIN work_flow ON request.oid = work_flow.request_id JOIN
+             step ON work_flow.oid = step.workflow_work_flow_id JOIN task ON task.step_id = step.oid WHERE quotation.request_id = request.oid AND step.deleted = 0)) 
+			 AND (@P_Hidden_Customer_Numeric IS NULL OR @P_Hidden_Customer_Numeric = 0 OR customer.oid = @P_Hidden_Customer_Numeric)</CommandText>
+      <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+    </Query>
+    <Fields>
+      <Field Name="purchase_orders">
+        <DataField>purchase_orders</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="first_name">
+        <DataField>first_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="last_name">
+        <DataField>last_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="symbol">
+        <DataField>symbol</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="name">
+        <DataField>name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="facture_no">
+        <DataField>facture_no</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="sub_total_before_tax">
+        <DataField>sub_total_before_tax</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="invoice_date">
+        <DataField>invoice_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="creation_date">
+        <DataField>creation_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

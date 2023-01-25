@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@Language">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Currency_Code">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Provider_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Customer_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Compl_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Compl_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>
+IF @P_Hidden_Provider_Numeric is not null
+-- Assume @P_Hiden_Customer_Numeric is null
+begin
+SELECT DISTINCT
+	 contact_requested_by_business_unit.name As contact_requested_by_business_unit_name,
+	 language_source.short_name As  language_source_short_name,
+	 contact_requested_by.last_name As  contact_requested_by_last_name,
+	 contact_requested_by.first_name As  contact_requested_by_first_name,
+	 language_target_request_shortname.targets As  language_target_request_shortname_targets,
+	 customer.name As  customer_name,
+	 request.request_no As  request_request_no,
+	 request.title As  request_title,
+	 request.is_quotation As  request_is_quotation,
+	 request.completed_date As  request_completed_date,
+	 request.delivery_date As  request_delivery_date,
+	 request_count_docs.doc_count As  request_count_docs_doc_count,
+	 usr.name As  usr_name
+	
+	FROM
+	    request 
+	    INNER JOIN work_flow ON (request.oid = work_flow.request_id)    
+	    LEFT JOIN request_count_docs ON (request.oid = request_count_docs.oid)
+	    LEFT JOIN usr ON (request.assigned_to_usr_id = usr.oid)
+	    LEFT JOIN language_target_request_shortname ON (request.oid = language_target_request_shortname.oid)
+	    LEFT JOIN language_v language_source ON (request.source_lngge_id = language_source.oid)
+	    LEFT JOIN contact contact_requested_by ON (request.requested_by_contact_id = contact_requested_by.oid)
+	    LEFT JOIN customer ON (request.customer_id = customer.oid)
+	    INNER JOIN step ON (work_flow.oid = step.workflow_work_flow_id)
+	    INNER JOIN task ON (step.oid = task.step_id)
+	    LEFT JOIN business_unit contact_requested_by_business_unit ON (contact_requested_by.business_unit_id = contact_requested_by_business_unit.oid)
+	WHERE
+	    request.model = 0
+	    AND step.deleted=0
+	    AND request.is_quotation = 0
+	    AND language_source.mapkey=@Language
+	    AND (language_target_request_shortname.oid IS NULL OR language_target_request_shortname.mapkey = @Language)
+	    AND (@P_Req_Rcpt_Date_From IS NULL OR request.reception_date &gt;= @P_Req_Rcpt_Date_From)
+	    AND (@P_Req_Rcpt_Date_To IS NULL OR request.reception_date &lt;= @P_Req_Rcpt_Date_To)
+	    AND (task.provider_id = @P_Hidden_Provider_Numeric)
+	    AND (@P_Req_Compl_Date_From IS NULL OR request.completed_date &gt;= @P_Req_Compl_Date_From)
+	    AND (@P_Req_Compl_Date_To IS NULL OR request.completed_date &lt;= @P_Req_Compl_Date_To)
+end
+ELSE
+	-- Customer query
+	if @P_Hidden_Customer_Numeric is not null
+	-- Assume @P_Hidden_Provider_Numeric is null
+	begin
+		SELECT DISTINCT
+			 contact_requested_by_business_unit.name As contact_requested_by_business_unit_name,
+			 language_source.short_name As  language_source_short_name,
+			 contact_requested_by.last_name As  contact_requested_by_last_name,
+			 contact_requested_by.first_name As  contact_requested_by_first_name,
+			 language_target_request_shortname.targets As  language_target_request_shortname_targets,
+			 customer.name As  customer_name,
+			 request.request_no As  request_request_no,
+			 request.title As  request_title,
+			 request.is_quotation As  request_is_quotation,
+			 request.completed_date As  request_completed_date,
+			 request.delivery_date As  request_delivery_date,
+			 request_count_docs.doc_count As  request_count_docs_doc_count,
+			 usr.name As  usr_name
+			
+			FROM
+			    request 
+			    INNER JOIN work_flow ON (request.oid = work_flow.request_id)    
+			    LEFT JOIN request_count_docs ON (request.oid = request_count_docs.oid)
+			    LEFT JOIN usr ON (request.assigned_to_usr_id = usr.oid)
+			    LEFT JOIN language_target_request_shortname ON (request.oid = language_target_request_shortname.oid)
+			    LEFT JOIN language_v language_source ON (request.source_lngge_id = language_source.oid)
+			    LEFT JOIN contact contact_requested_by ON (request.requested_by_contact_id = contact_requested_by.oid)
+			    INNER JOIN customer ON (request.customer_id = customer.oid)
+			    INNER JOIN step ON (work_flow.oid = step.workflow_work_flow_id)
+			    LEFT JOIN business_unit contact_requested_by_business_unit ON (contact_requested_by.business_unit_id = contact_requested_by_business_unit.oid)
+			WHERE
+			    request.model = 0
+			    AND step.deleted=0
+			    AND request.is_quotation = 0
+			    AND language_source.mapkey=@Language
+			    AND (language_target_request_shortname.oid IS NULL OR language_target_request_shortname.mapkey = @Language)
+			    AND (@P_Req_Rcpt_Date_From IS NULL OR request.reception_date &gt;= @P_Req_Rcpt_Date_From)
+			    AND (@P_Req_Rcpt_Date_To IS NULL OR request.reception_date &lt;= @P_Req_Rcpt_Date_To)
+			    AND (customer.oid = @P_Hidden_Customer_Numeric)
+			    AND (@P_Req_Compl_Date_From IS NULL OR request.completed_date &gt;= @P_Req_Compl_Date_From)
+			    AND (@P_Req_Compl_Date_To IS NULL OR request.completed_date &lt;= @P_Req_Compl_Date_To)
+	end	
+	else 
+	-- PM query
+	-- Assume @P_Hidden_Provider_Numeric is null
+	-- Assume @P_Hidden_Customer_Numeric is null
+	begin
+SELECT DISTINCT
+	 contact_requested_by_business_unit.name As contact_requested_by_business_unit_name,
+	 language_source.short_name As  language_source_short_name,
+	 contact_requested_by.last_name As  contact_requested_by_last_name,
+	 contact_requested_by.first_name As  contact_requested_by_first_name,
+	 language_target_request_shortname.targets As  language_target_request_shortname_targets,
+	 customer.name As  customer_name,
+	 request.request_no As  request_request_no,
+	 request.title As  request_title,
+	 request.is_quotation As  request_is_quotation,
+	 request.completed_date As  request_completed_date,
+	 request.delivery_date As  request_delivery_date,
+	 request_count_docs.doc_count As  request_count_docs_doc_count,
+	 usr.name As usr_name	
+	FROM
+	    request 
+	    INNER JOIN work_flow ON (request.oid = work_flow.request_id)    
+	    LEFT JOIN request_count_docs ON (request.oid = request_count_docs.oid)
+	    LEFT JOIN usr ON (request.assigned_to_usr_id = usr.oid)
+	    LEFT JOIN language_target_request_shortname ON (request.oid = language_target_request_shortname.oid)
+	    LEFT JOIN language_v language_source ON (request.source_lngge_id = language_source.oid)
+	    LEFT JOIN contact contact_requested_by ON (request.requested_by_contact_id = contact_requested_by.oid)
+	    LEFT JOIN customer ON (request.customer_id = customer.oid)
+	    INNER JOIN step ON (work_flow.oid = step.workflow_work_flow_id)
+	    LEFT JOIN business_unit contact_requested_by_business_unit ON (contact_requested_by.business_unit_id = contact_requested_by_business_unit.oid)
+	WHERE
+	    request.model = 0
+	    AND step.deleted=0
+	    AND request.is_quotation = 0
+	    AND language_source.mapkey=@Language
+	    AND (language_target_request_shortname.oid IS NULL OR language_target_request_shortname.mapkey = @Language)
+	    AND (@P_Req_Rcpt_Date_From IS NULL OR request.reception_date &gt;= @P_Req_Rcpt_Date_From)
+	    AND (@P_Req_Rcpt_Date_To IS NULL OR request.reception_date &lt;= @P_Req_Rcpt_Date_To)
+	    AND (@P_Req_Compl_Date_From IS NULL OR request.completed_date &gt;= @P_Req_Compl_Date_From)
+	    AND (@P_Req_Compl_Date_To IS NULL OR request.completed_date &lt;= @P_Req_Compl_Date_To)
+	end		   	    	   	    	    
+		</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="contact_requested_by_business_unit_name">
+        <DataField>contact_requested_by_business_unit_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="language_source_short_name">
+        <DataField>language_source_short_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="contact_requested_by_last_name">
+        <DataField>contact_requested_by_last_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="contact_requested_by_first_name">
+        <DataField>contact_requested_by_first_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="language_target_request_shortname_targets">
+        <DataField>language_target_request_shortname_targets</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="customer_name">
+        <DataField>customer_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_request_no">
+        <DataField>request_request_no</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_title">
+        <DataField>request_title</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_is_quotation">
+        <DataField>request_is_quotation</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="request_completed_date">
+        <DataField>request_completed_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="request_delivery_date">
+        <DataField>request_delivery_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="request_count_docs_doc_count">
+        <DataField>request_count_docs_doc_count</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="usr_name">
+        <DataField>usr_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@Language">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Customer_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT DISTINCT unit_v.word_group, unit_v.elmnt, unit_v.multi_trans_unit, document_info_sum_units_v.info_type, document_info_sum_units_v.unit_qty, customer.name, request.request_no, request.production_statusflow, request.is_quotation, request.reception_date
+FROM   request LEFT OUTER JOIN
+             customer ON request.customer_id = customer.oid LEFT OUTER JOIN
+             document_info_sum_units_v ON request.oid = document_info_sum_units_v.request_id LEFT OUTER JOIN
+             unit_v ON document_info_sum_units_v.unit_id = unit_v.oid
+WHERE (request.model = 0) AND (document_info_sum_units_v.request_id IS NULL OR
+             document_info_sum_units_v.languages = @Language AND unit_v.mapkey = @Language) AND (@P_Req_Rcpt_Date_From IS NULL OR
+             request.reception_date &gt;= @P_Req_Rcpt_Date_From) AND (@P_Req_Rcpt_Date_To IS NULL OR
+             request.reception_date &lt;= @P_Req_Rcpt_Date_To) AND (@P_Hidden_Customer_Numeric IS NULL OR
+             @P_Hidden_Customer_Numeric = 0 OR
+             request.customer_id = @P_Hidden_Customer_Numeric) AND (unit_v.multi_trans_unit = 1) AND (document_info_sum_units_v.info_type = 0) AND (request.is_quotation = 0) AND (request.production_statusflow &lt;&gt; 4)</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="word_group">
+        <DataField>word_group</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="elmnt">
+        <DataField>elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="multi_trans_unit">
+        <DataField>multi_trans_unit</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="info_type">
+        <DataField>info_type</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="unit_qty">
+        <DataField>unit_qty</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="name">
+        <DataField>name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_no">
+        <DataField>request_no</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="production_statusflow">
+        <DataField>production_statusflow</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="is_quotation">
+        <DataField>is_quotation</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="reception_date">
+        <DataField>reception_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

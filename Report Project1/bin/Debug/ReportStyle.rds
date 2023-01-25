@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="ReportStyle">
+  <ConnectionProperties>
+    <Extension>XML</Extension>
+    <ConnectString>&lt;Query&gt;
+	&lt;XmlData&gt;
+		&lt;Reportstyle&gt;
+			&lt;Style id="1"&gt;
+				&lt;StyleName&gt;RWS&lt;/StyleName&gt;
+				&lt;TableHeaderForeColor&gt;White&lt;/TableHeaderForeColor&gt;
+				&lt;TableHeaderBackColor&gt;#282C36&lt;/TableHeaderBackColor&gt;
+				&lt;TableSubHeaderForeColor&gt;White&lt;/TableSubHeaderForeColor&gt;
+				&lt;TableSubHeaderBackColor&gt;#008080&lt;/TableSubHeaderBackColor&gt;
+				&lt;ToogleRowBackColor1&gt;White&lt;/ToogleRowBackColor1&gt;
+				&lt;ToogleRowBackColor2&gt;#E4E9F0&lt;/ToogleRowBackColor2&gt;
+				&lt;Font&gt;Noto Sans&lt;/Font&gt;
+				&lt;FontSize&gt;14pt&lt;/FontSize&gt;
+				&lt;FontColor&gt;#282C36&lt;/FontColor&gt;
+				&lt;BorderColor&gt;#E4E9F0&lt;/BorderColor&gt;
+				&lt;BorderStyle&gt;Solid&lt;/BorderStyle&gt;
+				&lt;BorderWidth&gt;1pt&lt;/BorderWidth&gt;
+				&lt;BackGroundColor&gt;White&lt;/BackGroundColor&gt;
+				&lt;PaletteColor1&gt;#008080&lt;/PaletteColor1&gt;
+				&lt;PaletteColor2&gt;#282C36&lt;/PaletteColor2&gt;
+				&lt;PaletteColor3&gt;#475561&lt;/PaletteColor3&gt;
+				&lt;PaletteColor4&gt;#CBD4DD&lt;/PaletteColor4&gt;
+				&lt;PaletteColor5&gt;#E4E9F0&lt;/PaletteColor5&gt;
+				&lt;ChartFontSize&gt;8pt&lt;/ChartFontSize&gt;
+				&lt;HeaderForeColor&gt;#008080&lt;/HeaderForeColor&gt;
+				&lt;HeaderBackColor&gt;White&lt;/HeaderBackColor&gt;
+				&lt;HeaderFont&gt;Noto Sans Semi-Bold&lt;/HeaderFont&gt;
+				&lt;HeaderFontSize&gt;20pt&lt;/HeaderFontSize&gt;
+				&lt;FooterForeColor&gt;#008080&lt;/FooterForeColor&gt;
+				&lt;FooterBackColor&gt;White&lt;/FooterBackColor&gt;
+				&lt;FooterFont&gt;Noto Sans Light&lt;/FooterFont&gt;
+				&lt;FooterFontSize&gt;14pt&lt;/FooterFontSize&gt;
+				&lt;FooterLogoIcon&gt;MultiTrans&lt;/FooterLogoIcon&gt;
+				&lt;LogoImage&gt;RWSLogo&lt;/LogoImage&gt;
+				&lt;Activestatus&gt;1&lt;/Activestatus&gt;
+			&lt;/Style&gt;
+		&lt;/Reportstyle&gt;
+	&lt;/XmlData&gt;
+&lt;/Query&gt;</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>c09f54cc-d0f8-490c-a292-59fdf1d90520</DataSourceID>
+</RptDataSource>

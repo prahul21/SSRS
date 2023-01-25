@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>ReportStyle</DataSourceReference>
+      <CommandText>&lt;Query&gt;
+	&lt;XmlData&gt;
+		&lt;Reportstyle&gt;
+			&lt;Style id="1"&gt;
+				&lt;StyleName&gt;RWS&lt;/StyleName&gt;
+				&lt;TableHeaderForeColor&gt;White&lt;/TableHeaderForeColor&gt;
+				&lt;TableHeaderBackColor&gt;#282C36&lt;/TableHeaderBackColor&gt;
+				&lt;TableSubHeaderForeColor&gt;White&lt;/TableSubHeaderForeColor&gt;
+				&lt;TableSubHeaderBackColor&gt;#008080&lt;/TableSubHeaderBackColor&gt;
+				&lt;ToogleRowBackColor1&gt;White&lt;/ToogleRowBackColor1&gt;
+				&lt;ToogleRowBackColor2&gt;#E4E9F0&lt;/ToogleRowBackColor2&gt;
+				&lt;Font&gt;Noto Sans&lt;/Font&gt;
+				&lt;FontSize&gt;14pt&lt;/FontSize&gt;
+				&lt;FontColor&gt;#282C36&lt;/FontColor&gt;
+				&lt;BorderColor&gt;#E4E9F0&lt;/BorderColor&gt;
+				&lt;BorderStyle&gt;Solid&lt;/BorderStyle&gt;
+				&lt;BorderWidth&gt;1pt&lt;/BorderWidth&gt;
+				&lt;BackGroundColor&gt;White&lt;/BackGroundColor&gt;
+				&lt;PaletteColor1&gt;#008080&lt;/PaletteColor1&gt;
+				&lt;PaletteColor2&gt;#282C36&lt;/PaletteColor2&gt;
+				&lt;PaletteColor3&gt;#475561&lt;/PaletteColor3&gt;
+				&lt;PaletteColor4&gt;#CBD4DD&lt;/PaletteColor4&gt;
+				&lt;PaletteColor5&gt;#E4E9F0&lt;/PaletteColor5&gt;
+				&lt;ChartFontSize&gt;8pt&lt;/ChartFontSize&gt;
+				&lt;HeaderForeColor&gt;#008080&lt;/HeaderForeColor&gt;
+				&lt;HeaderBackColor&gt;White&lt;/HeaderBackColor&gt;
+				&lt;HeaderFont&gt;Noto Sans Semi-Bold&lt;/HeaderFont&gt;
+				&lt;HeaderFontSize&gt;20pt&lt;/HeaderFontSize&gt;
+				&lt;FooterForeColor&gt;#008080&lt;/FooterForeColor&gt;
+				&lt;FooterBackColor&gt;White&lt;/FooterBackColor&gt;
+				&lt;FooterFont&gt;Noto Sans Light&lt;/FooterFont&gt;
+				&lt;FooterFontSize&gt;14pt&lt;/FooterFontSize&gt;
+				&lt;FooterLogoIcon&gt;MultiTrans&lt;/FooterLogoIcon&gt;
+				&lt;LogoImage&gt;RWSLogo&lt;/LogoImage&gt;
+				&lt;Activestatus&gt;1&lt;/Activestatus&gt;
+			&lt;/Style&gt;
+		&lt;/Reportstyle&gt;
+	&lt;/XmlData&gt;
+&lt;/Query&gt;</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="id">
+        <DataField>id</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="StyleName">
+        <DataField>StyleName</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="TableHeaderForeColor">
+        <DataField>TableHeaderForeColor</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="TableHeaderBackColor">
+        <DataField>TableHeaderBackColor</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="TableSubHeaderForeColor">
+        <DataField>TableSubHeaderForeColor</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ToogleRowBackColor1">
+        <DataField>ToogleRowBackColor1</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="TableSubHeaderBackColor">
+        <DataField>TableSubHeaderBackColor</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ToogleRowBackColor2">
+        <DataField>ToogleRowBackColor2</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Font">
+        <DataField>Font</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="FontSize">
+        <DataField>FontSize</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="FontColor">
+        <DataField>FontColor</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="BorderColor">
+        <DataField>BorderColor</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="BorderStyle">
+        <DataField>BorderStyle</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="BorderWidth">
+        <DataField>BorderWidth</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="BackGroundColor">
+        <DataField>BackGroundColor</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="PaletteColor1">
+        <DataField>PaletteColor1</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Activestatus">
+        <DataField>Activestatus</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="PaletteColor2">
+        <DataField>PaletteColor2</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="PaletteColor3">
+        <DataField>PaletteColor3</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="PaletteColor4">
+        <DataField>PaletteColor4</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="PaletteColor5">
+        <DataField>PaletteColor5</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="ChartFontSize">
+        <DataField>ChartFontSize</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="HeaderForeColor">
+        <DataField>HeaderForeColor</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="HeaderBackColor">
+        <DataField>HeaderBackColor</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="HeaderFont">
+        <DataField>HeaderFont</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="HeaderFontSize">
+        <DataField>HeaderFontSize</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="FooterForeColor">
+        <DataField>FooterForeColor</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="FooterBackColor">
+        <DataField>FooterBackColor</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="FooterFont">
+        <DataField>FooterFont</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="FooterFontSize">
+        <DataField>FooterFontSize</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="FooterLogoIcon">
+        <DataField>FooterLogoIcon</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="LogoImage">
+        <DataField>LogoImage</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+    <Filters>
+      <Filter>
+        <FilterExpression>=Fields!Activestatus.Value</FilterExpression>
+        <Operator>Equal</Operator>
+        <FilterValues>
+          <FilterValue>1</FilterValue>
+        </FilterValues>
+      </Filter>
+    </Filters>
+  </DataSet>
+</SharedDataSet>

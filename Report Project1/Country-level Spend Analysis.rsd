@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@Language">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Currency_Code">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Customer_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Provider_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>
+-- Provider query
+IF @P_Hidden_Provider_Numeric is not null
+begin
+	SELECT DISTINCT 
+	             request_financial_stats.price AS request_financial_stats_price, 
+	             contact_requested_by_business_unit.name AS contact_requested_by_business_unit_name, 
+	             project.name AS project_name,  
+	             customer.name AS customer_name, 
+	             contact_requested_by_country.elmnt AS contact_requested_by_country_elmnt, 
+	             language_source.short_name AS language_source_short_name, 
+	             request.request_no AS request_request_no, currency.symbol AS currency_v_symbol
+	FROM request 
+	    INNER JOIN request_financial_stats ON request.oid = request_financial_stats.request_id 
+	    LEFT JOIN  project ON request.project_id = project.oid
+	    INNER JOIN contact AS contact_requested_by ON request.requested_by_contact_id = contact_requested_by.oid
+	    LEFT JOIN  business_unit AS contact_requested_by_business_unit ON contact_requested_by.business_unit_id = contact_requested_by_business_unit.oid
+	    INNER JOIN customer ON request.customer_id = customer.oid
+	    LEFT JOIN  address AS contact_requested_by_address ON contact_requested_by.address_id = contact_requested_by_address.oid
+	    LEFT JOIN  country_v AS contact_requested_by_country ON contact_requested_by_address.country_id = contact_requested_by_country.oid
+	    INNER JOIN language_v AS language_source ON request.source_lngge_id = language_source.oid
+	    INNER JOIN work_flow ON request.oid = work_flow.request_id
+	    INNER JOIN step ON work_flow.oid = step.workflow_work_flow_id
+	    INNER JOIN task ON step.oid = task.step_id
+	    LEFT JOIN  currency ON request_financial_stats.currency_id = currency.oid
+	WHERE 
+		(request.model = 0) AND 
+		(step.deleted = 0) AND 
+		(contact_requested_by_address.country_id IS NULL OR contact_requested_by_country.mapkey = @Language) AND
+	    (language_source.mapkey = @Language) AND 
+	    (@P_Req_Rcpt_Date_From IS NULL OR request.reception_date &gt;= @P_Req_Rcpt_Date_From) AND 
+	    (@P_Req_Rcpt_Date_To IS NULL OR request.reception_date &lt;= @P_Req_Rcpt_Date_To) AND
+	    (request_financial_stats.currency_id IS NULL OR request_financial_stats.currency_id = @P_Currency_Code) AND 
+	    (task.provider_id = @P_Hidden_Provider_Numeric)
+end
+	    
+ELSE
+
+	-- Customer query
+	if @P_Hidden_Customer_Numeric is not null
+		begin
+			SELECT DISTINCT 
+			             request_financial_stats.price AS request_financial_stats_price, 
+			             contact_requested_by_business_unit.name AS contact_requested_by_business_unit_name, 
+			             project.name AS project_name,  
+			             customer.name AS customer_name, 
+			             contact_requested_by_country.elmnt AS contact_requested_by_country_elmnt, 
+			             language_source.short_name AS language_source_short_name, 
+			             request.request_no AS request_request_no, currency.symbol AS currency_v_symbol
+			FROM request 
+			    INNER JOIN request_financial_stats ON request.oid = request_financial_stats.request_id
+			    LEFT JOIN  project ON request.project_id = project.oid
+			    INNER JOIN contact AS contact_requested_by ON request.requested_by_contact_id = contact_requested_by.oid
+			    LEFT JOIN business_unit AS contact_requested_by_business_unit ON contact_requested_by.business_unit_id = contact_requested_by_business_unit.oid
+			    INNER JOIN customer ON request.customer_id = customer.oid
+			    LEFT JOIN address AS contact_requested_by_address ON contact_requested_by.address_id = contact_requested_by_address.oid
+			    LEFT JOIN country_v AS contact_requested_by_country ON contact_requested_by_address.country_id = contact_requested_by_country.oid
+			    INNER JOIN language_v AS language_source ON request.source_lngge_id = language_source.oid
+			    LEFT JOIN  currency ON request_financial_stats.currency_id = currency.oid
+			WHERE 
+				(request.model = 0) AND  
+				(contact_requested_by_address.country_id IS NULL OR contact_requested_by_country.mapkey = @Language) AND
+			    (language_source.mapkey = @Language) AND 
+			    (@P_Req_Rcpt_Date_From IS NULL OR request.reception_date &gt;= @P_Req_Rcpt_Date_From) AND 
+			    (@P_Req_Rcpt_Date_To IS NULL OR request.reception_date &lt;= @P_Req_Rcpt_Date_To) AND
+			    (request_financial_stats.currency_id IS NULL OR request_financial_stats.currency_id = @P_Currency_Code) AND
+			    (customer.oid = @P_Hidden_Customer_Numeric) 
+		end
+	else 
+	-- PM query
+	BEGIN
+		SELECT DISTINCT 
+	             request_financial_stats.price AS request_financial_stats_price, 
+	             contact_requested_by_business_unit.name AS contact_requested_by_business_unit_name, 
+	             project.name AS project_name,  
+	             customer.name AS customer_name, 
+	             contact_requested_by_country.elmnt AS contact_requested_by_country_elmnt, 
+	             language_source.short_name AS language_source_short_name, 
+	             request.request_no AS request_request_no, currency.symbol AS currency_v_symbol
+	FROM request 
+	    INNER JOIN request_financial_stats ON request.oid = request_financial_stats.request_id
+	    LEFT JOIN project ON request.project_id = project.oid
+	    INNER JOIN contact AS contact_requested_by ON request.requested_by_contact_id = contact_requested_by.oid
+	    LEFT JOIN business_unit AS contact_requested_by_business_unit ON contact_requested_by.business_unit_id = contact_requested_by_business_unit.oid
+	    INNER JOIN customer ON request.customer_id = customer.oid
+	    LEFT JOIN address AS contact_requested_by_address ON contact_requested_by.address_id = contact_requested_by_address.oid
+	    LEFT JOIN country_v AS contact_requested_by_country ON contact_requested_by_address.country_id = contact_requested_by_country.oid
+	    INNER JOIN language_v AS language_source ON request.source_lngge_id = language_source.oid
+	    LEFT JOIN currency ON request_financial_stats.currency_id = currency.oid
+	WHERE 
+		(request.model = 0) AND 
+		(contact_requested_by_address.country_id IS NULL OR contact_requested_by_country.mapkey = @Language) AND
+	    (language_source.mapkey = @Language) AND 
+	    (@P_Req_Rcpt_Date_From IS NULL OR request.reception_date &gt;= @P_Req_Rcpt_Date_From) AND 
+	    (@P_Req_Rcpt_Date_To IS NULL OR request.reception_date &lt;= @P_Req_Rcpt_Date_To) AND
+	    (request_financial_stats.currency_id IS NULL OR request_financial_stats.currency_id = @P_Currency_Code)
+	END
+
+    
+    </CommandText>
+    </Query>
+    <Fields>
+      <Field Name="request_financial_stats_price">
+        <DataField>request_financial_stats_price</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="contact_requested_by_business_unit_name">
+        <DataField>contact_requested_by_business_unit_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="project_name">
+        <DataField>project_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="customer_name">
+        <DataField>customer_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="contact_requested_by_country_elmnt">
+        <DataField>contact_requested_by_country_elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="language_source_short_name">
+        <DataField>language_source_short_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_request_no">
+        <DataField>request_request_no</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="currency_v_symbol">
+        <DataField>currency_v_symbol</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

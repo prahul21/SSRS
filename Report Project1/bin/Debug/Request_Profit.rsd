@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>Flow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@Language">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Rcpt_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Currency_Code">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Provider_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Hidden_Customer_Numeric">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Compl_Date_From">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Compl_Date_To">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>DateTime</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@P_Req_Years">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>true</Nullable>
+          <OmitFromQuery>true</OmitFromQuery>
+          <rd:UserDefined>true</rd:UserDefined>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>
+-- Provider query
+IF @P_Hidden_Provider_Numeric is not null
+-- Assume P_Hidden_Customer_Numeric is null
+begin -- Provider query
+		SELECT DISTINCT
+		    request_financial_stats.cost        As request_financial_stats_cost
+		  , request_financial_stats.currency_id As request_financial_stats_currency_id
+		  , request_financial_stats.price       As request_financial_stats_price
+		  , currency.symbol                     As currency_v_symbol
+		  , contact_requested_by.last_name      As contact_requested_by_last_name
+		  , contact_requested_by.first_name     As contact_requested_by_first_name
+		  , customer.name                       As customer_name
+		  , request.request_no                  As request_request_no
+		  , request.is_quotation                As request_is_quotation
+		  , request.completed_date              As request_completed_date
+		  , request.reception_date              As request_reception_date
+		  , request.model                       As request_model
+		  , request.delivery_date               As request_delivery_date
+		  , dmn_v.elmnt                         As dmn_v_elmnt
+		  , usr.name                            As usr_name
+		, dmn_v.oid As dmn_v_oid
+		FROM
+			--Tables needed by select clause
+		
+			--request
+		    request
+		    -- request_financial_stats
+		    INNER JOIN request_financial_stats ON (request.oid = request_financial_stats.request_id)
+		    
+		    --currency
+		    LEFT JOIN currency ON (request_financial_stats.currency_id = currency.oid)
+		    
+		    -- contact_requested_by
+		    LEFT JOIN contact contact_requested_by ON (request.requested_by_contact_id = contact_requested_by.oid)
+		
+		    --customer also referenced by P_Hidden_Customer_Numeric
+		    LEFT JOIN customer ON (request.customer_id = customer.oid)
+		
+		    -- dmn_v
+		    LEFT JOIN dmn_v ON (request.dmn_id = dmn_v.oid)
+		
+		    -- usr
+		    LEFT JOIN usr ON (request.assigned_to_usr_id = usr.oid)
+			
+			--Tables needed by where clause    
+		    INNER JOIN work_flow ON (request.oid = work_flow.request_id)                                    
+		    INNER JOIN step ON (work_flow.oid = step.workflow_work_flow_id)
+		    --referenced by P_Hidden_Provider_Numeric		
+			INNER JOIN task ON (step.oid = task.step_id) --inner join because provider id is != null    
+		    
+		WHERE
+		    request.model = 0
+		    AND request.is_quotation = 0
+		    AND step.deleted=0 -- left joins would only give null. Changing request - workflow - step to inner ones
+		    AND (request.dmn_id IS NULL OR dmn_v.mapkey = @Language)
+		    AND (@P_Req_Rcpt_Date_From IS NULL OR request.reception_date  &gt;= @P_Req_Rcpt_Date_From)
+		    AND (@P_Req_Rcpt_Date_To  IS NULL OR request.reception_date &lt;= @P_Req_Rcpt_Date_To)
+		    AND (task.provider_id = @P_Hidden_Provider_Numeric)        
+		    AND (@P_Currency_Code = request_financial_stats.currency_id)
+		    AND (@P_Req_Compl_Date_From IS NULL OR request.completed_date &gt;= @P_Req_Compl_Date_From)
+		    AND (@P_Req_Compl_Date_To IS NULL OR request.completed_date &lt;= @P_Req_Compl_Date_To)
+end --Provider query
+
+ELSE --So it is not provider query
+
+	-- Customer query
+	if @P_Hidden_Customer_Numeric is not null
+	    -- Assume @P_Hidden_Provider_Numeric is null
+		begin -- Customer query
+			
+		SELECT DISTINCT
+		    request_financial_stats.cost        As request_financial_stats_cost
+		  , request_financial_stats.currency_id As request_financial_stats_currency_id
+		  , request_financial_stats.price       As request_financial_stats_price
+		  , currency.symbol                     As currency_v_symbol
+		  , contact_requested_by.last_name      As contact_requested_by_last_name
+		  , contact_requested_by.first_name     As contact_requested_by_first_name
+		  , customer.name                       As customer_name
+		  , request.request_no                  As request_request_no
+		  , request.is_quotation                As request_is_quotation
+		  , request.completed_date              As request_completed_date
+		  , request.reception_date              As request_reception_date
+		  , request.model                       As request_model
+		  , request.delivery_date               As request_delivery_date
+		  , dmn_v.elmnt                         As dmn_v_elmnt
+		  , usr.name                            As usr_name
+		, dmn_v.oid As dmn_v_oid
+		FROM
+			--Tables needed by select clause
+		
+			--request
+		    request
+		    -- request_financial_stats
+		    INNER JOIN request_financial_stats ON (request.oid = request_financial_stats.request_id)
+		    
+		    --currency
+		    LEFT JOIN currency ON (request_financial_stats.currency_id = currency.oid)
+		    
+		    -- contact_requested_by
+		    LEFT JOIN contact contact_requested_by ON (request.requested_by_contact_id = contact_requested_by.oid)
+		
+		    --customer also referenced by P_Hidden_Customer_Numeric
+		    INNER JOIN customer ON (request.customer_id = customer.oid) -- customer must be present
+		
+		    -- dmn_v
+		    LEFT JOIN dmn_v ON (request.dmn_id = dmn_v.oid)
+		
+		    -- usr
+		    LEFT JOIN usr ON (request.assigned_to_usr_id = usr.oid)					    
+		    
+		WHERE
+		    request.model = 0
+		    AND request.is_quotation = 0		    
+		    AND (request.dmn_id IS NULL OR dmn_v.mapkey = @Language)
+		    AND (@P_Req_Rcpt_Date_From IS NULL OR request.reception_date  &gt;= @P_Req_Rcpt_Date_From)
+		    AND (@P_Req_Rcpt_Date_To  IS NULL OR request.reception_date &lt;= @P_Req_Rcpt_Date_To)
+		    AND (customer.oid = @P_Hidden_Customer_Numeric)        
+		    AND (@P_Currency_Code = request_financial_stats.currency_id)
+		    AND (@P_Req_Compl_Date_From IS NULL OR request.completed_date &gt;= @P_Req_Compl_Date_From)
+		    AND (@P_Req_Compl_Date_To IS NULL OR request.completed_date &lt;= @P_Req_Compl_Date_To)
+			
+		end -- Customer query
+	else
+		begin -- PM Query
+			-- Assume @P_Hidden_Provider_Numeric is null
+			-- Assume @P_Hidden_Customer_Numeric is null
+						
+			SELECT DISTINCT
+			    request_financial_stats.cost        As request_financial_stats_cost
+			  , request_financial_stats.currency_id As request_financial_stats_currency_id
+			  , request_financial_stats.price       As request_financial_stats_price
+			  , currency.symbol                     As currency_v_symbol
+			  , contact_requested_by.last_name      As contact_requested_by_last_name
+			  , contact_requested_by.first_name     As contact_requested_by_first_name
+			  , customer.name                       As customer_name
+			  , request.request_no                  As request_request_no
+			  , request.is_quotation                As request_is_quotation
+			  , request.completed_date              As request_completed_date
+			  , request.reception_date              As request_reception_date
+			  , request.model                       As request_model
+			  , request.delivery_date               As request_delivery_date
+			  , dmn_v.elmnt                         As dmn_v_elmnt
+			  , usr.name                            As usr_name
+			, dmn_v.oid As dmn_v_oid
+			FROM
+				--Tables needed by select clause
+			
+				--request
+			    request
+			    -- request_financial_stats
+			    INNER JOIN request_financial_stats ON (request.oid = request_financial_stats.request_id)
+			    
+			    --currency
+			    LEFT JOIN currency ON (request_financial_stats.currency_id = currency.oid)
+			    
+			    -- contact_requested_by
+			    LEFT JOIN contact contact_requested_by ON (request.requested_by_contact_id = contact_requested_by.oid)
+			
+			    --customer also referenced by P_Hidden_Customer_Numeric
+			    LEFT JOIN customer ON (request.customer_id = customer.oid)
+			
+			    -- dmn_v
+			    LEFT JOIN dmn_v ON (request.dmn_id = dmn_v.oid)
+			
+			    -- usr
+			    LEFT JOIN usr ON (request.assigned_to_usr_id = usr.oid)
+							    
+			WHERE
+			    request.model = 0
+			    AND request.is_quotation = 0
+			    AND (request.dmn_id IS NULL OR dmn_v.mapkey = @Language)
+			    AND (@P_Req_Rcpt_Date_From IS NULL OR request.reception_date  &gt;= @P_Req_Rcpt_Date_From)
+			    AND (@P_Req_Rcpt_Date_To  IS NULL OR request.reception_date &lt;= @P_Req_Rcpt_Date_To)
+			    AND (@P_Currency_Code = request_financial_stats.currency_id)
+			    AND (@P_Req_Compl_Date_From IS NULL OR request.completed_date &gt;= @P_Req_Compl_Date_From)
+			    AND (@P_Req_Compl_Date_To IS NULL OR request.completed_date &lt;= @P_Req_Compl_Date_To)
+			
+		end -- PM Query
+
+      </CommandText>
+    </Query>
+    <Fields>
+      <Field Name="request_financial_stats_cost">
+        <DataField>request_financial_stats_cost</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="request_financial_stats_currency_id">
+        <DataField>request_financial_stats_currency_id</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="request_financial_stats_price">
+        <DataField>request_financial_stats_price</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="currency_v_symbol">
+        <DataField>currency_v_symbol</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="contact_requested_by_last_name">
+        <DataField>contact_requested_by_last_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="contact_requested_by_first_name">
+        <DataField>contact_requested_by_first_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="customer_name">
+        <DataField>customer_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_request_no">
+        <DataField>request_request_no</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="request_is_quotation">
+        <DataField>request_is_quotation</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="request_completed_date">
+        <DataField>request_completed_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="request_reception_date">
+        <DataField>request_reception_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="request_model">
+        <DataField>request_model</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="request_delivery_date">
+        <DataField>request_delivery_date</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="dmn_v_elmnt">
+        <DataField>dmn_v_elmnt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="usr_name">
+        <DataField>usr_name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="dmn_v_oid">
+        <DataField>dmn_v_oid</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>
